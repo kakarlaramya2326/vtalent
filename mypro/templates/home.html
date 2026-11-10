@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}VTalent Institute | Learn, Build, Grow{% endblock %}
+{% block content %}
+<section class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> TRAINING · CAREER DEVELOPMENT · IT</span>
+      <h1>Build skills.<br><span>Shape your future.</span></h1>
+      <p class="hero-lede">Practical technology training and career support designed to help you take the next step with confidence.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="{% url 'student_registration' %}">Register Now <i class="bi bi-arrow-right ms-2"></i></a>
+        <a class="btn btn-outline-dark btn-lg" href="{% url 'about_institute' %}">Discover VTalent</a>
+      </div>
+      <div class="hero-note"><i class="bi bi-check-circle-fill"></i> Training for aspiring technology professionals</div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-frame">
+        <img src="{% static 'images/vtalent.jpg' %}" alt="VTalent Institute">
+      </div>
+      <div class="floating-note"><span class="floating-icon"><i class="bi bi-lightbulb"></i></span><span><strong>Learn with purpose</strong><small>Skills for your next chapter</small></span></div>
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-space">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">YOUR NEXT STEP STARTS HERE</span>
+      <h2>Learning that moves you forward</h2>
+      <p>Explore a focused learning path, strengthen your skills, and get support as you prepare for opportunities.</p>
+    </div>
+    <div class="row g-4 feature-grid">
+      <div class="col-md-4">
+        <article class="feature-card">
+          <span class="feature-icon"><i class="bi bi-laptop"></i></span>
+          <h3>Technology training</h3>
+          <p>Build foundations in full-stack development, AI integration, and cloud technologies.</p>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="feature-card">
+          <span class="feature-icon feature-icon-green"><i class="bi bi-person-workspace"></i></span>
+          <h3>Career development</h3>
+          <p>Develop practical skills and get guidance to help you take informed career steps.</p>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="feature-card">
+          <span class="feature-icon feature-icon-gold"><i class="bi bi-people"></i></span>
+          <h3>Hiring support</h3>
+          <p>VTalent can connect businesses with trained candidates based on their requirements.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-cta">
+  <div class="container home-cta-inner">
+    <div><span class="eyebrow eyebrow-light">READY TO GET STARTED?</span><h2>Take the first step toward your goals.</h2></div>
+    <a class="btn btn-light btn-lg" href="{% url 'student_registration' %}">Register Now <i class="bi bi-arrow-right ms-2"></i></a>
+  </div>
+</section>
+{% endblock %}
