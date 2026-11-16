@@ -1,0 +1,21 @@
+{% load static %}
+<section class="section-space one-page-section" id="ceo">
+  <div class="container ceo-layout">
+    <div class="ceo-photo-wrap">
+      <img class="ceo-photo" src="{% static 'images/ceo.jpg' %}" alt="Prasad Mandava, CEO of VTalent">
+      <div class="ceo-photo-caption"><i class="bi bi-building"></i><span>Leading VTalent since 2014</span></div>
+    </div>
+    <div class="ceo-profile">
+      <span class="eyebrow">MEET THE CEO</span>
+      <h2>Prasad Mandava</h2>
+      <p class="ceo-designation">Chief Executive Officer, VTalent</p>
+      <p>Prasad Mandava leads VTalent with a focus on leadership, strategic planning, and human resources management. As CEO since 2014, his work centers on fostering innovation and empowering professionals through services and resources that help individuals develop their careers and businesses meet their objectives.</p>
+      <p>At VTalent, he leads a team working to align professionals with business requirements while encouraging people to pursue their aspirations.</p>
+      <div class="leadership-message">
+        <span><i class="bi bi-chat-quote"></i></span>
+        <div><h3>Leadership focus</h3><p>Advancing talent development and creating meaningful opportunities for growth for individuals and organizations.</p></div>
+      </div>
+      <a class="text-link" href="{% if request.resolver_match.url_name == 'home' %}#contact{% else %}{% url 'home' %}#contact{% endif %}">Connect with VTalent <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+</section>

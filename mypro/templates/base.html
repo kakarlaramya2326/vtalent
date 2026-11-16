@@ -15,6 +15,9 @@
   {% block extra_head %}{% endblock %}
 </head>
 <body>
+  <div class="reading-progress" role="progressbar" aria-label="Page reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span class="reading-progress-bar"></span>
+  </div>
   <div class="topbar">
     <div class="container topbar-inner">
       <span><i class="bi bi-geo-alt"></i> Hyderabad, Telangana</span>
@@ -27,17 +30,19 @@
   <nav class="navbar navbar-expand-lg navbar-light site-nav">
     <div class="container">
       <a class="navbar-brand brand" href="{% url 'home' %}" aria-label="VTalent Institute home">
-        <span class="brand-mark">V</span><span>VTALENT<small>INSTITUTE</small></span>
+        <img class="brand-logo" src="{% static 'vtalent.jpg' %}" alt="VTalent Institute">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mainNavigation">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'about_institute' %}">About Institute</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'about_ceo' %}">About CEO</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#home{% else %}{% url 'home' %}#home{% endif %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#about-institute{% else %}{% url 'home' %}#about-institute{% endif %}">About Institute</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#courses{% else %}{% url 'home' %}#courses{% endif %}">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#placements{% else %}{% url 'home' %}#placements{% endif %}">Placements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#ceo{% else %}{% url 'home' %}#ceo{% endif %}">About CEO</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% if request.resolver_match.url_name == 'home' %}#contact{% else %}{% url 'home' %}#contact{% endif %}">Contact</a></li>
           <li class="nav-item ms-lg-3"><a class="btn btn-primary nav-cta" href="{% url 'student_registration' %}">Register Now <i class="bi bi-arrow-right"></i></a></li>
         </ul>
       </div>
@@ -51,17 +56,18 @@
   <footer class="site-footer">
     <div class="container footer-main">
       <div class="footer-brand">
-        <a class="brand brand-light" href="{% url 'home' %}">
-          <span class="brand-mark">V</span><span>VTALENT<small>INSTITUTE</small></span>
+        <a class="brand brand-light" href="{% if request.resolver_match.url_name == 'home' %}#home{% else %}{% url 'home' %}#home{% endif %}" aria-label="VTalent Institute home">
+          <img class="brand-logo" src="{% static 'vtalent.jpg' %}" alt="VTalent Institute">
         </a>
         <p>Training and career development to help learners build skills for their next opportunity.</p>
       </div>
       <div class="footer-links">
         <h2>Explore</h2>
-        <a href="{% url 'about_institute' %}">About the institute</a>
-        <a href="{% url 'about_ceo' %}">About the CEO</a>
-        <a href="{% url 'courses' %}">Courses</a>
-        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% if request.resolver_match.url_name == 'home' %}#about-institute{% else %}{% url 'home' %}#about-institute{% endif %}">About the institute</a>
+        <a href="{% if request.resolver_match.url_name == 'home' %}#ceo{% else %}{% url 'home' %}#ceo{% endif %}">About the CEO</a>
+        <a href="{% if request.resolver_match.url_name == 'home' %}#courses{% else %}{% url 'home' %}#courses{% endif %}">Courses</a>
+        <a href="{% if request.resolver_match.url_name == 'home' %}#placements{% else %}{% url 'home' %}#placements{% endif %}">Placements</a>
+        <a href="{% if request.resolver_match.url_name == 'home' %}#contact{% else %}{% url 'home' %}#contact{% endif %}">Contact</a>
       </div>
       <div class="footer-links">
         <h2>Get in touch</h2>
@@ -74,7 +80,11 @@
       <div class="container">© VTalent Institute. All rights reserved.</div>
     </div>
   </footer>
+  <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden>
+    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+  </button>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/site.js' %}" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

@@ -181,29 +181,84 @@ COURSES = [
     },
 ]
 
+# Add confirmed student stories here only after getting permission to publish them.
+# Student photos should use paths under static/, e.g. images/students/name.jpg.
+PLACEMENT_STUDENTS = []
+# Company entries use {"name": "...", "logo": "images/companies/name.png"}; logo is optional.
+PLACEMENT_COMPANIES = []
+# Reel entries use {"title": "...", "url": "...", "embed_url": ".../embed"}.
+INSTAGRAM_REELS = []
+# Interview entries use {"title": "...", "video_id": "YouTube video ID"}.
+YOUTUBE_INTERVIEWS = [
+    {
+        "title": "Before Joining Any IT Institute, Watch This!",
+        "channel": "Vtalent Hyd",
+        "video_id": "ObGBTAsR2E0",
+    },
+    {
+        "title": "Best Career Advice in IT Industry You’ll Ever Get!",
+        "channel": "Vtalent IT Academy",
+        "video_id": "OxSGJ3HYm1Q",
+    },
+]
+
 WHATSAPP_NUMBER = "918977149444"
 REGISTRATION_SESSION_KEY = "student_registration"
 
 
 def home(request):
-    return render(request, "home.html")
+    return render(
+        request,
+        "home.html",
+        {
+            "courses": COURSES,
+            "full_stack_courses": sorted(
+                COURSES,
+                key=lambda course: course["number"],
+            ),
+            "placement_companies": PLACEMENT_COMPANIES,
+            "instagram_reels": INSTAGRAM_REELS,
+            "youtube_interviews": YOUTUBE_INTERVIEWS,
+        },
+    )
 
 
 def student_registration(request):
+    selected_course_slug = request.POST.get("course") or request.GET.get("course")
+    selected_course = next(
+        (
+            item
+            for item in COURSES
+            if item["slug"] == selected_course_slug
+        ),
+        None,
+    )
+
     if request.method == "POST":
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
             request.session[REGISTRATION_SESSION_KEY] = form.cleaned_data
+            if selected_course is not None:
+                return redirect(
+                    "course_interest",
+                    course_slug=selected_course["slug"],
+                )
             return redirect("courses")
     else:
         form = StudentRegistrationForm()
 
-    return render(request, "student.html", {"form": form})
+    return render(
+        request,
+        "student.html",
+        {
+            "form": form,
+            "selected_course": selected_course,
+            "selected_course_slug": selected_course_slug,
+        },
+    )
 
 
 def courses(request):
-    if not request.session.get(REGISTRATION_SESSION_KEY):
-        return redirect("student_registration")
     return render(
         request,
         "course.html",
@@ -212,6 +267,17 @@ def courses(request):
                 COURSES,
                 key=lambda course: course["number"],
             ),
+        },
+    )
+
+
+def student_placements(request):
+    return render(
+        request,
+        "placesstudent.html",
+        {
+            "placement_students": PLACEMENT_STUDENTS,
+            "placement_companies": PLACEMENT_COMPANIES,
         },
     )
 

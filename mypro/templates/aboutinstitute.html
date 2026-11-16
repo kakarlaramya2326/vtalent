@@ -9,33 +9,5 @@
     <p>Technology training and career development in Hyderabad.</p>
   </div>
 </section>
-<section class="section-space">
-  <div class="container institute-layout">
-    <div class="institute-image-wrap">
-      <img src="{% static 'images/vtalent.jpg' %}" alt="VTalent Institute">
-      <div class="image-label"><i class="bi bi-mortarboard"></i> Skills for a changing industry</div>
-    </div>
-    <div class="institute-copy">
-      <span class="eyebrow">WHO WE ARE</span>
-      <h2>Helping talent grow into opportunity.</h2>
-      <p>VTalent is a Hyderabad-based training and career development institute. We work to align professional skills with business requirements and support learners as they work toward their aspirations.</p>
-      <p>Our programs include Java Full Stack with AI integration and Python Full Stack with AI/ML. Training is intended for learners building practical technology skills, including graduates from CSE, IT, ECE, and EEE streams.</p>
-      <a class="btn btn-primary" href="{% url 'student_registration' %}">Explore registration <i class="bi bi-arrow-right ms-2"></i></a>
-    </div>
-  </div>
-</section>
-<section class="programs-band">
-  <div class="container">
-    <div class="section-heading text-center">
-      <span class="eyebrow">THE VTALENT APPROACH</span>
-      <h2>Learn, practice, prepare</h2>
-      <p>A learning experience built around skills development and career readiness.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4"><article class="approach-card"><span>01</span><h3>Training programs</h3><p>Explore full-stack development, AI integration, and other technology learning paths.</p></article></div>
-      <div class="col-md-4"><article class="approach-card"><span>02</span><h3>Learning approach</h3><p>Build relevant skills through focused training designed to help learners prepare for professional work.</p></article></div>
-      <div class="col-md-4"><article class="approach-card"><span>03</span><h3>Placement assistance</h3><p>VTalent can support hiring by sharing relevant, trained candidates based on employer requirements. Placement is not guaranteed.</p></article></div>
-    </div>
-  </div>
-</section>
+{% include 'partials/institute_section.html' %}
 {% endblock %}

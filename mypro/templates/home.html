@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}VTalent Institute | Learn, Build, Grow{% endblock %}
 {% block content %}
-<section class="hero-section">
+<section class="hero-section one-page-section" id="home">
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow"><span class="eyebrow-dot"></span> TRAINING · CAREER DEVELOPMENT · IT</span>
@@ -10,22 +10,43 @@
       <p class="hero-lede">Practical technology training and career support designed to help you take the next step with confidence.</p>
       <div class="hero-actions">
         <a class="btn btn-primary btn-lg" href="{% url 'student_registration' %}">Register Now <i class="bi bi-arrow-right ms-2"></i></a>
-        <a class="btn btn-outline-dark btn-lg" href="{% url 'about_institute' %}">Discover VTalent</a>
+        <a class="btn btn-outline-dark btn-lg" href="#about-institute">Discover VTalent</a>
       </div>
       <div class="hero-note"><i class="bi bi-check-circle-fill"></i> Training for aspiring technology professionals</div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-image-frame">
-        <img src="{% static 'images/vtalent.jpg' %}" alt="VTalent Institute">
-      </div>
-      <div class="floating-note"><span class="floating-icon"><i class="bi bi-lightbulb"></i></span><span><strong>Learn with purpose</strong><small>Skills for your next chapter</small></span></div>
-      <div class="hero-orbit orbit-one"></div>
-      <div class="hero-orbit orbit-two"></div>
     </div>
   </div>
 </section>
 
-<section class="section-space">
+<section class="home-courses-section section-space" id="course-preview">
+  <div class="container">
+    <div class="home-section-heading">
+      <div>
+        <span class="eyebrow">LEARN WITH VTALENT</span>
+        <h2>Explore our programs</h2>
+        <p>Choose a learning path and build practical skills with project and career preparation.</p>
+      </div>
+      <a class="section-link" href="#courses">View all courses <i class="bi bi-arrow-down"></i></a>
+    </div>
+    <div class="row g-4">
+      {% for course in courses %}
+      <div class="col-md-6">
+        <article class="home-course-card">
+          <div class="home-course-top">
+            <span class="home-course-icon"><i class="bi {{ course.icon }}"></i></span>
+            <span class="course-duration-pill"><i class="bi bi-clock"></i> {{ course.duration }}</span>
+          </div>
+          <span class="home-course-category">{{ course.category }}</span>
+          <h3>{{ course.name }}</h3>
+          <p>{{ course.description }}</p>
+          <a class="btn btn-primary" href="{% url 'student_registration' %}?course={{ course.slug }}">Register for this course <i class="bi bi-arrow-right ms-2"></i></a>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-space" id="learning">
   <div class="container">
     <div class="section-heading text-center">
       <span class="eyebrow">YOUR NEXT STEP STARTS HERE</span>
@@ -57,6 +78,78 @@
     </div>
   </div>
 </section>
+
+{% include 'partials/institute_section.html' %}
+{% include 'partials/courses_section.html' %}
+{% include 'partials/placements_section.html' %}
+{% include 'partials/ceo_section.html' %}
+
+<section class="social-showcase-section section-space" id="community">
+  <div class="container">
+    <div class="home-section-heading">
+      <div>
+        <span class="eyebrow">LIFE AT VTALENT</span>
+        <h2>Watch, learn, get inspired</h2>
+        <p>Reels and conversations from the VTalent community.</p>
+      </div>
+      <a class="section-link" href="https://www.instagram.com/hyd.vtalent/?hl=en" target="_blank" rel="noopener noreferrer">Follow on Instagram <i class="bi bi-instagram"></i></a>
+    </div>
+    <div class="row g-4 social-media-grid">
+      <div class="col-lg-6">
+        <article class="social-media-panel">
+          <div class="social-panel-heading">
+            <span class="social-brand-icon instagram-icon"><i class="bi bi-instagram"></i></span>
+            <div><h3>VTalent Reels</h3><p>Short moments, ideas, and updates</p></div>
+          </div>
+          {% if instagram_reels %}
+          <div class="social-embed-grid">
+            {% for reel in instagram_reels %}
+            <div class="social-embed-item">
+              <iframe src="{{ reel.embed_url }}" title="{{ reel.title }}" loading="lazy" allowfullscreen></iframe>
+              <a href="{{ reel.url }}" target="_blank" rel="noopener noreferrer">{{ reel.title }} <i class="bi bi-arrow-up-right"></i></a>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <a class="social-empty-card instagram-empty" href="https://www.instagram.com/hyd.vtalent/?hl=en" target="_blank" rel="noopener noreferrer">
+            <span class="social-empty-icon"><i class="bi bi-play-btn"></i></span>
+            <span><strong>See the latest from VTalent</strong><small>Visit our Instagram profile for reels and updates.</small></span>
+            <i class="bi bi-arrow-up-right social-empty-arrow"></i>
+          </a>
+          {% endif %}
+        </article>
+      </div>
+      <div class="col-lg-6">
+        <article class="social-media-panel">
+          <div class="social-panel-heading">
+            <span class="social-brand-icon youtube-icon"><i class="bi bi-youtube"></i></span>
+            <div><h3>Recent videos &amp; interviews</h3><p>Watch stories and insights from the VTalent community</p></div>
+          </div>
+          {% if youtube_interviews %}
+          <div class="youtube-video-list">
+            {% for interview in youtube_interviews %}
+            <article class="youtube-video-card">
+              <div class="youtube-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/{{ interview.video_id }}" title="{{ interview.title }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <h4>{{ interview.title }}</h4>
+              <p>{{ interview.channel }}</p>
+            </article>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="social-empty-card youtube-empty">
+            <span class="social-empty-icon"><i class="bi bi-camera-video"></i></span>
+            <span><strong>Interviews coming soon</strong><small>VTalent video conversations will be featured here.</small></span>
+          </div>
+          {% endif %}
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include 'partials/contact_section.html' %}
 
 <section class="home-cta">
   <div class="container home-cta-inner">

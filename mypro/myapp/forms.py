@@ -1,5 +1,4 @@
 import re
-from datetime import date
 
 from django import forms
 
@@ -51,19 +50,16 @@ class StudentRegistrationForm(forms.Form):
     passed_out_year = forms.IntegerField(
         label="Passed Out Year",
         min_value=1950,
-        max_value=date.today().year,
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
                 "min": "1950",
-                "max": str(date.today().year),
                 "placeholder": "e.g. 2026",
             }
         ),
         error_messages={
             "invalid": "Enter a valid four-digit year.",
             "min_value": "Enter a valid passed out year.",
-            "max_value": "Passed out year cannot be in the future.",
         },
     )
 

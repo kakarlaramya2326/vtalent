@@ -24,6 +24,8 @@
       </div>
       <form method="post" action="{% url 'student_registration' %}" novalidate>
         {% csrf_token %}
+        {% if selected_course_slug %}<input type="hidden" name="course" value="{{ selected_course_slug }}">{% endif %}
+        {% if selected_course %}<div class="selected-course-banner">Selected course: <strong>{{ selected_course.name }}</strong></div>{% endif %}
         <div class="mb-3">
           <label class="form-label" for="{{ form.student_name.id_for_label }}">{{ form.student_name.label }}</label>
           {{ form.student_name }}

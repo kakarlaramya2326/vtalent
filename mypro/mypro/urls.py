@@ -22,6 +22,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("student-registration/", views.student_registration, name="student_registration"),
     path("courses/", views.courses, name="courses"),
+    path("student-placements/", views.student_placements, name="student_placements"),
     path(
         "courses/<slug:course_slug>/interest/",
         views.course_interest,
