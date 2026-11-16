@@ -822,6 +822,17 @@ a.social-empty-card:hover { background: #f3eddf; border-color: #cbb58e; color: v
 .placements-empty-icon { align-items: center; background: #f2e9da; border-radius: 16px; color: #916a34; display: inline-flex; font-size: 1.8rem; height: 65px; justify-content: center; width: 65px; }
 .placements-empty-state h3 { color: var(--navy); font-size: 1.35rem; font-weight: 800; margin: 18px 0 8px; }
 .placements-empty-state p { color: var(--muted); font-size: .91rem; margin: 0 auto 20px; max-width: 535px; }
+.placement-gallery { margin: 0 -12px 36px; overflow: hidden; padding: 8px 0 18px; }
+.placement-gallery-track { animation: placement-gallery-scroll 48s linear infinite; display: flex; width: max-content; }
+.placement-gallery:hover .placement-gallery-track { animation-play-state: paused; }
+.placement-gallery-group { display: flex; flex: 0 0 auto; gap: 18px; padding-right: 18px; }
+.placement-gallery-item { background: #fffefa; border: 1px solid #e7dfd1; border-radius: 15px; box-shadow: 0 12px 30px rgba(52,48,36,.1); flex: 0 0 240px; margin: 0; overflow: hidden; }
+.placement-gallery-photo { aspect-ratio: 4 / 5; display: block; object-fit: cover; width: 100%; }
+@keyframes placement-gallery-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .placement-gallery { overflow-x: auto; }
+  .placement-gallery-track { animation: none; }
+}
 .student-story-card { background: #fffefa; border: 1px solid #e7dfd1; border-radius: 15px; height: 100%; overflow: hidden; }
 .student-story-photo { aspect-ratio: 4 / 3; background: #eee8dc; display: block; object-fit: cover; width: 100%; }
 .student-photo-placeholder { align-items: center; color: #aa997e; display: flex; font-size: 4rem; justify-content: center; }

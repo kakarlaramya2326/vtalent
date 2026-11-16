@@ -7,6 +7,22 @@
       <p>Celebrate the learners, milestones, and employer connections shared by the VTalent community.</p>
     </div>
 
+    {% if placement_photos %}
+    <div class="placement-gallery" role="region" aria-label="VTalent student placement photos">
+      <div class="placement-gallery-track">
+        {% for group in placement_photo_groups %}
+        <div class="placement-gallery-group" {% if forloop.counter == 2 %}aria-hidden="true"{% endif %}>
+          {% for photo in group %}
+          <figure class="placement-gallery-item">
+            <img class="placement-gallery-photo" src="{% static photo %}" alt="VTalent student placement photo {{ forloop.counter }}">
+          </figure>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
     {% if placement_students %}
     <div class="row g-4 student-story-grid">
       {% for student in placement_students %}
@@ -30,7 +46,7 @@
       </div>
       {% endfor %}
     </div>
-    {% else %}
+    {% elif not placement_photos %}
     <div class="placements-empty-state">
       <span class="placements-empty-icon"><i class="bi bi-stars"></i></span>
       <h3>Student stories are coming soon</h3>

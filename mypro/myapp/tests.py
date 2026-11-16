@@ -80,11 +80,15 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, "Prasad Mandava")
         self.assertContains(response, "Let’s start a conversation.")
 
-    def test_student_placements_page_has_empty_states_without_invented_profiles(self):
+    def test_student_placements_page_shows_uploaded_photos_without_invented_profiles(self):
         response = self.client.get(reverse("student_placements"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Student stories are coming soon")
+        self.assertGreater(len(response.context["placement_photos"]), 0)
+        self.assertContains(response, 'aria-label="VTalent student placement photos"')
+        self.assertContains(response, 'class="placement-gallery-track"')
+        self.assertContains(response, 'aria-hidden="true"')
+        self.assertNotContains(response, "Student stories are coming soon")
         self.assertContains(response, "Company highlights will appear here")
         self.assertNotContains(response, "Amazon")
 

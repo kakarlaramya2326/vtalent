@@ -1,3 +1,4 @@
+from pathlib import Path
 from urllib.parse import quote
 
 from django.shortcuts import redirect, render
@@ -204,9 +205,28 @@ YOUTUBE_INTERVIEWS = [
 
 WHATSAPP_NUMBER = "918977149444"
 REGISTRATION_SESSION_KEY = "student_registration"
+PLACEMENT_PHOTO_DIRECTORY = (
+    Path(__file__).resolve().parent.parent / "static" / "pplacement pics"
+)
+
+
+def get_placement_photos():
+    supported_extensions = {".jpg", ".jpeg", ".png", ".webp"}
+    if not PLACEMENT_PHOTO_DIRECTORY.is_dir():
+        return []
+
+    return [
+        f"pplacement pics/{photo.name}"
+        for photo in sorted(
+            PLACEMENT_PHOTO_DIRECTORY.iterdir(),
+            key=lambda photo: photo.name.casefold(),
+        )
+        if photo.is_file() and photo.suffix.lower() in supported_extensions
+    ]
 
 
 def home(request):
+    placement_photos = get_placement_photos()
     return render(
         request,
         "home.html",
@@ -216,6 +236,9 @@ def home(request):
                 COURSES,
                 key=lambda course: course["number"],
             ),
+            "placement_students": PLACEMENT_STUDENTS,
+            "placement_photos": placement_photos,
+            "placement_photo_groups": (placement_photos, placement_photos),
             "placement_companies": PLACEMENT_COMPANIES,
             "instagram_reels": INSTAGRAM_REELS,
             "youtube_interviews": YOUTUBE_INTERVIEWS,
@@ -272,11 +295,14 @@ def courses(request):
 
 
 def student_placements(request):
+    placement_photos = get_placement_photos()
     return render(
         request,
         "placesstudent.html",
         {
             "placement_students": PLACEMENT_STUDENTS,
+            "placement_photos": placement_photos,
+            "placement_photo_groups": (placement_photos, placement_photos),
             "placement_companies": PLACEMENT_COMPANIES,
         },
     )
