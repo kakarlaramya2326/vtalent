@@ -130,10 +130,11 @@
             {% for interview in youtube_interviews %}
             <article class="youtube-video-card">
               <div class="youtube-embed">
-                <iframe src="https://www.youtube-nocookie.com/embed/{{ interview.video_id }}" title="{{ interview.title }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/{{ interview.video_id }}" title="{{ interview.title }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <h4>{{ interview.title }}</h4>
               <p>{{ interview.channel }}</p>
+              <a class="youtube-watch-link" href="https://www.youtube.com/watch?v={{ interview.video_id }}" target="_blank" rel="noopener noreferrer">Watch on YouTube <i class="bi bi-arrow-up-right"></i></a>
             </article>
             {% endfor %}
           </div>

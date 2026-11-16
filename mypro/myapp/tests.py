@@ -42,12 +42,13 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, "Recent videos &amp; interviews")
         self.assertContains(
             response,
-            "https://www.youtube-nocookie.com/embed/ObGBTAsR2E0",
+            "https://www.youtube.com/embed/ObGBTAsR2E0",
         )
         self.assertContains(
             response,
-            "https://www.youtube-nocookie.com/embed/OxSGJ3HYm1Q",
+            "https://www.youtube.com/embed/OxSGJ3HYm1Q",
         )
+        self.assertContains(response, "Watch on YouTube")
         self.assertContains(
             response,
             "Before Joining Any IT Institute, Watch This!",
