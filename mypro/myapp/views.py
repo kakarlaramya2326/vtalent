@@ -187,8 +187,24 @@ COURSES = [
 PLACEMENT_STUDENTS = []
 # Company entries use {"name": "...", "logo": "images/companies/name.png"}; logo is optional.
 PLACEMENT_COMPANIES = []
-# Reel entries use {"title": "...", "url": "...", "embed_url": ".../embed"}.
-INSTAGRAM_REELS = []
+# Reel entries use {"title": "...", "url": "...", "thumbnail": "images/..."}.
+INSTAGRAM_REELS = [
+    {
+        "title": "New Batch Starting December 2nd",
+        "url": "https://www.instagram.com/reel/DfmBX_gRmRG/",
+        "thumbnail": "images/instagram-reels/DfmBX_gRmRG.jpg",
+    },
+    {
+        "title": "Congratulations to Our Students",
+        "url": "https://www.instagram.com/reel/DeUBkeypw4z/",
+        "thumbnail": "images/instagram-reels/DeUBkeypw4z.jpg",
+    },
+    {
+        "title": "New Batch Starting October 28",
+        "url": "https://www.instagram.com/reel/DeMvYd-pRwP/",
+        "thumbnail": "images/instagram-reels/DeMvYd-pRwP.jpg",
+    },
+]
 # Interview entries use {"title": "...", "video_id": "YouTube video ID"}.
 YOUTUBE_INTERVIEWS = [
     {

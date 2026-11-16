@@ -102,12 +102,15 @@
             <div><h3>VTalent Reels</h3><p>Short moments, ideas, and updates</p></div>
           </div>
           {% if instagram_reels %}
-          <div class="social-embed-grid">
+          <div class="instagram-reel-grid">
             {% for reel in instagram_reels %}
-            <div class="social-embed-item">
-              <iframe src="{{ reel.embed_url }}" title="{{ reel.title }}" loading="lazy" allowfullscreen></iframe>
-              <a href="{{ reel.url }}" target="_blank" rel="noopener noreferrer">{{ reel.title }} <i class="bi bi-arrow-up-right"></i></a>
-            </div>
+            <article class="instagram-reel-card">
+              <a class="instagram-reel-thumbnail" href="{{ reel.url }}" target="_blank" rel="noopener noreferrer" aria-label="Watch {{ reel.title }} on Instagram">
+                <img src="{% static reel.thumbnail %}" alt="{{ reel.title }} Instagram Reel thumbnail" loading="lazy">
+                <span class="instagram-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+              </a>
+              <a class="instagram-reel-title" href="{{ reel.url }}" target="_blank" rel="noopener noreferrer">{{ reel.title }} <i class="bi bi-arrow-up-right"></i></a>
+            </article>
             {% endfor %}
           </div>
           {% else %}
@@ -130,7 +133,10 @@
             {% for interview in youtube_interviews %}
             <article class="youtube-video-card">
               <div class="youtube-embed">
-                <iframe src="https://www.youtube.com/embed/{{ interview.video_id }}" title="{{ interview.title }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <a class="youtube-video-link" href="https://www.youtube.com/watch?v={{ interview.video_id }}" target="_blank" rel="noopener noreferrer" aria-label="Watch {{ interview.title }} on YouTube">
+                  <img src="https://i.ytimg.com/vi/{{ interview.video_id }}/hqdefault.jpg" alt="{{ interview.title }} video thumbnail" loading="lazy">
+                  <span class="youtube-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+                </a>
               </div>
               <h4>{{ interview.title }}</h4>
               <p>{{ interview.channel }}</p>

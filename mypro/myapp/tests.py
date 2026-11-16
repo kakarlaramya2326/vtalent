@@ -42,13 +42,14 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, "Recent videos &amp; interviews")
         self.assertContains(
             response,
-            "https://www.youtube.com/embed/ObGBTAsR2E0",
+            "https://i.ytimg.com/vi/ObGBTAsR2E0/hqdefault.jpg",
         )
         self.assertContains(
             response,
-            "https://www.youtube.com/embed/OxSGJ3HYm1Q",
+            "https://i.ytimg.com/vi/OxSGJ3HYm1Q/hqdefault.jpg",
         )
         self.assertContains(response, "Watch on YouTube")
+        self.assertNotContains(response, "<iframe")
         self.assertContains(
             response,
             "Before Joining Any IT Institute, Watch This!",
@@ -62,7 +63,14 @@ class StudentRegistrationWorkflowTests(TestCase):
             response.content.count(
                 b"https://www.instagram.com/hyd.vtalent/?hl=en"
             ),
-            2,
+            1,
+        )
+        self.assertContains(response, "DfmBX_gRmRG.jpg")
+        self.assertContains(response, "DeUBkeypw4z.jpg")
+        self.assertContains(response, "DeMvYd-pRwP.jpg")
+        self.assertContains(
+            response,
+            "Watch New Batch Starting December 2nd on Instagram",
         )
         self.assertContains(response, reverse("student_registration"))
         for section_id in (
@@ -103,7 +111,7 @@ class StudentRegistrationWorkflowTests(TestCase):
             {
                 "title": "Sample reel",
                 "url": "https://www.instagram.com/reel/sample/",
-                "embed_url": "https://www.instagram.com/reel/sample/embed",
+                "thumbnail": "images/instagram-reels/sample.jpg",
             }
         ],
     )
@@ -129,6 +137,7 @@ class StudentRegistrationWorkflowTests(TestCase):
 
         self.assertContains(home_response, "Sample employer")
         self.assertContains(home_response, "Sample reel")
+        self.assertContains(home_response, "images/instagram-reels/sample.jpg")
         self.assertContains(home_response, "Sample interview")
         self.assertContains(placements_response, "Sample learner")
         self.assertContains(placements_response, "Developer")

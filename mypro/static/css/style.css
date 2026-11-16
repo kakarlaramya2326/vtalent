@@ -796,11 +796,23 @@ a.social-empty-card:hover { background: #f3eddf; border-color: #cbb58e; color: v
 .social-embed-item { min-width: 0; }
 .social-embed-item iframe { aspect-ratio: 9 / 13; border: 0; border-radius: 10px; max-height: 360px; width: 100%; }
 .social-embed-item > a { color: #805c2b; display: block; font-size: .78rem; font-weight: 700; margin-top: 6px; }
+.instagram-reel-grid { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.instagram-reel-card { min-width: 0; }
+.instagram-reel-thumbnail { aspect-ratio: 9 / 16; background: #e7e0d4; border-radius: 10px; display: block; overflow: hidden; position: relative; }
+.instagram-reel-thumbnail img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.instagram-play-icon { align-items: center; background: linear-gradient(135deg, #833ab4, #e1306c 58%, #f77737); border-radius: 50%; color: white; display: flex; font-size: 1.65rem; height: 44px; justify-content: center; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 44px; }
+.instagram-reel-title { color: #805c2b; display: block; font-size: .74rem; font-weight: 700; line-height: 1.4; margin-top: 7px; }
+.instagram-reel-title:hover { color: #64451e; }
 .youtube-video-list { display: grid; gap: 15px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.youtube-embed { aspect-ratio: 16 / 9; background: #e7e0d4; border-radius: 10px; overflow: hidden; }
-.youtube-embed iframe { border: 0; height: 100%; width: 100%; }
+.youtube-embed { aspect-ratio: 16 / 9; background: #e7e0d4; border-radius: 10px; overflow: hidden; position: relative; }
+.youtube-video-link, .youtube-video-link img { display: block; height: 100%; width: 100%; }
+.youtube-video-link img { object-fit: cover; }
+.youtube-play-icon { align-items: center; background: #f03; border-radius: 12px; color: white; display: flex; font-size: 2rem; height: 48px; justify-content: center; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 68px; }
+.youtube-video-link:hover .youtube-play-icon { background: #d9002b; }
 .youtube-video-card h4 { color: var(--navy); font-size: .81rem; font-weight: 800; margin: 8px 0 0; }
 .youtube-video-card p { color: var(--muted); font-size: .73rem; margin: 3px 0 0; }
+.youtube-watch-link { color: #805c2b; display: inline-block; font-size: .78rem; font-weight: 700; margin-top: 5px; }
+.youtube-watch-link:hover { color: #64451e; }
 
 .placements-page-section {
   background:
@@ -933,3 +945,338 @@ main > section[id], main section[id] { scroll-margin-top: 92px; }
 @media (max-width: 480px) {
   .back-to-top { bottom: 17px; height: 43px; right: 16px; width: 43px; }
 }
+
+.student-registration-page {
+  --registration-forest: #263a30;
+  --registration-gold: #c9a66a;
+  --registration-ink: #26352b;
+}
+
+.registration-hero {
+  background:
+    radial-gradient(ellipse at 75% 42%, rgba(196,154,88,.19), transparent 34%),
+    linear-gradient(116deg, #202f27, #354638 58%, #263a30);
+  color: #fffdf8;
+  overflow: hidden;
+  position: relative;
+}
+
+.registration-hero::before {
+  border: 1px solid rgba(224,195,142,.12);
+  border-radius: 50%;
+  content: "";
+  height: 560px;
+  position: absolute;
+  right: -135px;
+  top: -220px;
+  width: 560px;
+}
+
+.registration-hero-inner {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1.05fr .95fr;
+  min-height: 445px;
+  padding-bottom: 48px;
+  padding-top: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.registration-hero-copy { max-width: 570px; }
+.registration-hero-copy .eyebrow { color: #e1c38e; }
+.registration-hero-copy .eyebrow-dot { background: #d3b273; }
+.registration-hero-copy h1 {
+  color: #fffdf8;
+  font-size: clamp(2.7rem, 5.2vw, 4.35rem);
+  font-weight: 800;
+  letter-spacing: -.065em;
+  line-height: 1.06;
+  margin: 20px 0 17px;
+}
+.registration-hero-copy h1 span { color: #dfc28e; }
+.registration-hero-copy > p {
+  color: #d2d7cd;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 24px;
+  max-width: 470px;
+}
+.registration-hero-link {
+  align-items: center;
+  color: #f0d7a8;
+  display: inline-flex;
+  font-size: .92rem;
+  font-weight: 700;
+  gap: 9px;
+  transition: color .2s ease, gap .2s ease;
+}
+.registration-hero-link:hover { color: white; gap: 13px; }
+.registration-hero-link:focus-visible { outline: 2px solid #f0d7a8; outline-offset: 5px; }
+
+.registration-hero-art {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 340px;
+  position: relative;
+}
+.hero-art-orbit {
+  border: 1px solid rgba(226,202,157,.19);
+  border-radius: 50%;
+  height: 315px;
+  position: absolute;
+  transform: rotate(-24deg) scaleY(.64);
+  width: 315px;
+}
+.hero-art-orbit-one { height: 375px; width: 375px; }
+.hero-art-orbit-two { transform: rotate(36deg) scaleY(.7); }
+.hero-art-card {
+  background: linear-gradient(145deg, rgba(255,253,247,.16), rgba(255,253,247,.06));
+  border: 1px solid rgba(245,231,204,.27);
+  border-radius: 22px;
+  box-shadow: 0 28px 70px rgba(13,22,17,.22), inset 0 1px rgba(255,255,255,.13);
+  display: flex;
+  flex-direction: column;
+  min-height: 255px;
+  padding: 27px 30px 23px;
+  position: relative;
+  transform: rotate(2deg);
+  width: min(100%, 330px);
+  z-index: 1;
+}
+.hero-art-kicker { color: #e1c38e; font-size: .66rem; font-weight: 800; letter-spacing: .16em; }
+.hero-art-number {
+  color: #fffaf0;
+  font-family: "Manrope", sans-serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -.08em;
+  line-height: 1;
+  margin: 26px 0 9px;
+}
+.hero-art-number span { color: #d5bd90; font-size: 1rem; letter-spacing: 0; margin-left: 8px; }
+.hero-art-title { color: #f7f3e8; font-family: "Manrope", sans-serif; font-size: 1.12rem; font-weight: 700; line-height: 1.45; }
+.hero-art-footer { align-items: center; display: flex; gap: 5px; margin-top: auto; padding-top: 20px; }
+.hero-art-footer > span { background: rgba(235,220,190,.25); border-radius: 5px; height: 4px; width: 25px; }
+.hero-art-footer > span:first-child { background: #d7b778; width: 45px; }
+.hero-art-footer small { color: #d7d9cf; font-size: .59rem; font-weight: 700; letter-spacing: .12em; margin-left: auto; }
+.hero-art-sparkle {
+  align-items: center;
+  background: #d8bc84;
+  border: 5px solid #2e4033;
+  border-radius: 50%;
+  color: #29382e;
+  display: inline-flex;
+  font-size: 1.2rem;
+  height: 53px;
+  justify-content: center;
+  position: absolute;
+  right: max(2%, calc((100% - 370px) / 2));
+  top: 41px;
+  width: 53px;
+  z-index: 2;
+}
+
+.student-registration-page .registration-section {
+  background:
+    radial-gradient(ellipse at 94% 16%, rgba(196,154,88,.11), transparent 26%),
+    radial-gradient(ellipse at 0% 85%, rgba(83,118,98,.08), transparent 30%),
+    #f6f3eb;
+}
+.student-registration-page .registration-layout {
+  align-items: start;
+  gap: clamp(42px, 7vw, 92px);
+  grid-template-columns: minmax(230px, .75fr) minmax(0, 1.25fr);
+  max-width: 1110px;
+}
+.student-registration-page .registration-aside { padding: 16px 0; }
+.student-registration-page .step-badge { color: #96703b; font-size: .75rem; letter-spacing: .12em; }
+.student-registration-page .step-badge span { color: #a4a093; font-size: .72rem; }
+.student-registration-page .registration-aside h2 {
+  color: #263a30;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.2;
+  margin: 17px 0 14px;
+}
+.student-registration-page .registration-aside > p { color: #6c7167; font-size: .96rem; line-height: 1.75; margin-bottom: 27px; }
+.registration-steps { position: relative; }
+.registration-steps::before {
+  background: #e2dac9;
+  content: "";
+  height: 37px;
+  left: 16px;
+  position: absolute;
+  top: 33px;
+  width: 1px;
+}
+.student-registration-page .registration-step { gap: 13px; margin-top: 15px; position: relative; }
+.student-registration-page .registration-step > span {
+  background: #a77a3c;
+  box-shadow: 0 0 0 5px #f6f3eb;
+  flex: 0 0 34px;
+  height: 34px;
+  width: 34px;
+}
+.student-registration-page .registration-step-active > span { background: #526b52; }
+.student-registration-page .registration-step > .step-muted { background: #eae5da; color: #7b766a; }
+.student-registration-page .registration-step strong { color: #344337; font-size: .9rem; }
+.student-registration-page .registration-step small { color: #858477; font-size: .79rem; }
+.registration-note {
+  align-items: center;
+  background: rgba(255,255,255,.64);
+  border: 1px solid #e8e1d4;
+  border-radius: 13px;
+  display: flex;
+  gap: 13px;
+  margin-top: 34px;
+  padding: 15px;
+}
+.registration-note-icon {
+  align-items: center;
+  background: #f1e8d8;
+  border-radius: 10px;
+  color: #8e672f;
+  display: inline-flex;
+  flex: 0 0 39px;
+  height: 39px;
+  justify-content: center;
+}
+.registration-note p { color: #77776d; font-size: .78rem; line-height: 1.55; margin: 0; }
+.registration-note strong { color: #344337; font-size: .86rem; }
+
+.student-registration-page .form-card {
+  animation: rise-in .65s cubic-bezier(.2, .7, .25, 1) .1s both;
+  background: linear-gradient(145deg, #fffefa, #fbf8f1);
+  border: 1px solid #e7dfd1;
+  border-radius: 20px;
+  box-shadow: 0 24px 65px rgba(52,48,36,.11);
+  padding: clamp(25px, 4vw, 40px);
+  scroll-margin-top: 100px;
+}
+.student-registration-page .form-card-heading {
+  border-bottom: 0;
+  gap: 15px;
+  margin-bottom: 17px;
+  padding-bottom: 0;
+}
+.student-registration-page .form-icon {
+  background: #f1e8d8;
+  border: 1px solid #e9dcc4;
+  border-radius: 13px;
+  color: #8e672f;
+  flex: 0 0 49px;
+  height: 49px;
+  width: 49px;
+}
+.form-step-label { color: #9a7946; display: block; font-size: .65rem; font-weight: 800; letter-spacing: .13em; margin-bottom: 3px; }
+.student-registration-page .form-card-heading h2 { color: #2b3b30; font-size: 1.35rem; letter-spacing: -.035em; }
+.student-registration-page .form-card-heading p { color: #77776d; font-size: .84rem; }
+.form-progress { background: #eee8dc; border-radius: 5px; height: 5px; margin: 22px 0 25px; overflow: hidden; }
+.form-progress > span { background: linear-gradient(90deg, #a77732, #d0b078); border-radius: inherit; display: block; height: 100%; width: 50%; }
+.selected-course-banner {
+  background: #f4ede0;
+  border: 1px solid #e8ddca;
+  border-radius: 9px;
+  color: #6e634e;
+  font-size: .84rem;
+  margin-bottom: 21px;
+  padding: 11px 14px;
+}
+.selected-course-banner i { color: #99733d; margin-right: 5px; }
+.selected-course-banner strong { color: #3e4938; }
+.student-registration-page .registration-field { margin-bottom: 18px !important; }
+.student-registration-page .form-label { color: #414b3f; font-size: .83rem; font-weight: 700; margin-bottom: 7px; }
+.field-with-icon { position: relative; }
+.field-with-icon > i {
+  color: #9a8b6e;
+  font-size: 1rem;
+  left: 14px;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.student-registration-page .form-control {
+  background: #fffefa;
+  border: 1px solid #e3dccf;
+  border-radius: 10px;
+  color: #344337;
+  min-height: 51px;
+  padding-left: 42px;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.student-registration-page .form-control::placeholder { color: #a7a69d; }
+.student-registration-page .form-control:focus {
+  background: white;
+  border-color: #a98651;
+  box-shadow: 0 0 0 .22rem rgba(167,119,50,.12);
+}
+.student-registration-page .form-submit {
+  background: linear-gradient(115deg, #a77732, #89612d);
+  border: 1px solid #956a30;
+  border-radius: 10px;
+  box-shadow: 0 9px 20px rgba(135,95,41,.16);
+  font-size: .96rem;
+  margin-top: 4px;
+  padding: 14px 18px;
+  transition: box-shadow .2s ease, transform .2s ease, background .2s ease;
+}
+.student-registration-page .form-submit:hover {
+  background: linear-gradient(115deg, #92682f, #765126);
+  box-shadow: 0 13px 25px rgba(135,95,41,.23);
+  transform: translateY(-2px);
+}
+.student-registration-page .form-submit:focus-visible { box-shadow: 0 0 0 .22rem rgba(167,119,50,.25); }
+.student-registration-page .form-privacy { color: #858477; font-size: .77rem; margin: 15px 0 0; }
+.student-registration-page .form-privacy i { color: #648065; }
+
+@media (max-width: 767.98px) {
+  .registration-hero-inner { gap: 4px; grid-template-columns: 1fr; min-height: auto; padding-bottom: 23px; padding-top: 48px; }
+  .registration-hero-copy h1 { font-size: clamp(2.55rem, 10vw, 3.6rem); }
+  .registration-hero-art { min-height: 285px; }
+  .hero-art-orbit-one { height: 320px; width: 320px; }
+  .hero-art-orbit-two { height: 270px; width: 270px; }
+  .hero-art-card { min-height: 225px; width: min(82%, 315px); }
+  .hero-art-sparkle { right: 9%; top: 13px; }
+  .student-registration-page .registration-layout { gap: 32px; grid-template-columns: 1fr; }
+  .student-registration-page .registration-aside { padding: 0; }
+  .registration-note { margin-top: 24px; max-width: 420px; }
+}
+
+@media (max-width: 480px) {
+  .registration-hero-inner { padding-top: 39px; }
+  .registration-hero-copy .eyebrow { font-size: .64rem; letter-spacing: .1em; }
+  .registration-hero-copy > p { font-size: .96rem; }
+  .registration-hero-art { min-height: 265px; }
+  .hero-art-card { min-height: 210px; padding: 23px; }
+  .hero-art-number { font-size: 3.9rem; margin-top: 21px; }
+  .student-registration-page .form-card { border-radius: 16px; padding: 23px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-hero-link, .student-registration-page .form-submit { transition: none; }
+  .student-registration-page .form-card { animation: none; }
+}
+
+.btn:hover,
+.feature-card:hover,
+.course-card:hover,
+.contact-card:hover,
+.program-card:hover,
+.home-course-card:hover,
+a.social-empty-card:hover,
+.back-to-top:hover,
+.student-registration-page .form-submit:hover,
+.feature-card:hover .feature-icon,
+.contact-card:hover .contact-icon,
+.course-card:hover .course-icon,
+.btn:hover i,
+.text-link:hover i,
+.contact-card a:hover i {
+  transform: none;
+}
+
+.registration-hero-link:hover { gap: 9px; }
