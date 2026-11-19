@@ -11,6 +11,7 @@ from .views import REGISTRATION_SESSION_KEY
 class StudentRegistrationWorkflowTests(TestCase):
     def setUp(self):
         self.valid_registration = {
+            "program_type": "coaching",
             "student_name": "Asha Rao",
             "college_name": "Osmania University",
             "mobile_number": "9876543210",
@@ -25,6 +26,7 @@ class StudentRegistrationWorkflowTests(TestCase):
             "contact",
             "student_registration",
             "student_placements",
+            "internships",
         ):
             with self.subTest(route=route_name):
                 response = self.client.get(reverse(route_name))
@@ -37,6 +39,38 @@ class StudentRegistrationWorkflowTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Explore our programs")
+        self.assertContains(response, 'class="institute-video"')
+        self.assertContains(response, 'autoplay muted loop playsinline')
+        self.assertContains(response, "vtalennanimation/vtalent(video).mp4")
+        self.assertContains(response, 'id="highlights"')
+        self.assertContains(response, "Training beyond")
+        self.assertContains(response, "A dedicated institute for eligible graduates")
+        self.assertContains(response, "eligible CSE, IT, and ECE graduates only")
+        self.assertContains(response, 'class="hero-highlights-track"')
+        self.assertNotContains(response, "What makes VTalent different")
+        self.assertNotContains(response, 'href="#highlights"')
+        self.assertNotContains(response, ">Highlights</a>")
+        self.assertContains(response, "45-day internships available")
+        for track in ("Python", "Java", "SQL", "AI/ML"):
+            with self.subTest(internship_track=track):
+                self.assertEqual(
+                    response.content.count(f"<strong>{track}</strong>".encode()),
+                    2,
+                )
+        self.assertContains(response, 'class="hero-corporate-highlights"')
+        self.assertContains(response, 'aria-labelledby="corporate-highlights-title"')
+        self.assertContains(response, 'class="corporate-highlights-track"')
+        self.assertContains(response, 'class="corporate-highlights-group" aria-hidden="true"')
+        for highlight in (
+            "Working professionals",
+            "No partiality",
+            "Placement support from onboarding",
+            "Quality without compromise",
+            "Current-year graduates",
+        ):
+            with self.subTest(corporate_highlight=highlight):
+                self.assertEqual(response.content.count(highlight.encode()), 2)
+        self.assertContains(response, "6-MONTH COACHING")
         self.assertContains(response, "Register for this course")
         self.assertContains(response, "VTalent Reels")
         self.assertContains(response, "Recent videos &amp; interviews")
@@ -89,11 +123,60 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, "Prasad Mandava")
         self.assertContains(response, "Let’s start a conversation.")
 
+    def test_home_programs_show_background_courses_and_scrollable_internships(self):
+        response = self.client.get(reverse("home"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "home-course-card-python")
+        self.assertContains(response, "home-course-card-java")
+        self.assertContains(
+            response,
+            'role="region" aria-label="Scroll through 45-day internship programs"',
+        )
+        self.assertEqual(response.content.count(b'class="home-internship-card"'), 5)
+        self.assertContains(response, "Register for this internship")
+        course_backgrounds = {
+            course["slug"]: course["background_image"]
+            for course in response.context["courses"]
+        }
+        self.assertEqual(
+            course_backgrounds["python-full-stack"],
+            "Registerpage/python-training-leadpro.webp",
+        )
+        self.assertEqual(
+            course_backgrounds["java-full-stack"],
+            "Registerpage/java-training-institute.webp",
+        )
+
+    def test_internships_show_python_and_java_45_day_tracks(self):
+        response = self.client.get(reverse("internships"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Python Development Internship")
+        self.assertContains(response, "Java Development Internship")
+        self.assertContains(response, "SQL Database Internship")
+        self.assertContains(response, "AI &amp; Machine Learning Internship")
+        self.assertContains(response, "AWS Cloud Internship")
+        self.assertContains(response, "Core subjects you’ll learn")
+        self.assertContains(response, "data types, and operators")
+        self.assertContains(response, "object-oriented programming")
+        self.assertEqual(
+            [program["duration"] for program in response.context["internships"]],
+            ["45 days"] * 5,
+        )
+
     def test_student_placements_page_shows_uploaded_photos_without_invented_profiles(self):
         response = self.client.get(reverse("student_placements"))
 
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.context["placement_photos"]), 0)
+        self.assertEqual(
+            response.context["placement_photos"],
+            sorted(
+                response.context["placement_photos"],
+                key=lambda photo: photo.rsplit("/", 1)[-1].rsplit(".", 1)[0].casefold(),
+            ),
+        )
         self.assertContains(response, 'aria-label="VTalent student placement photos"')
         self.assertContains(response, 'class="placement-gallery-track"')
         self.assertContains(response, 'aria-hidden="true"')
@@ -166,6 +249,83 @@ class StudentRegistrationWorkflowTests(TestCase):
             2025,
         )
         self.assertEqual(self.client.get(reverse("courses")).status_code, 200)
+
+    def test_internship_registration_routes_to_internship_choices(self):
+        response = self.client.post(
+            reverse("student_registration"),
+            {**self.valid_registration, "program_type": "internship"},
+        )
+
+        self.assertRedirects(response, reverse("internships"))
+        self.assertEqual(
+            self.client.session[REGISTRATION_SESSION_KEY]["program_type"],
+            "internship",
+        )
+
+    def test_registration_shows_45_day_courses_with_backgrounds(self):
+        response = self.client.get(
+            reverse("student_registration"),
+            {"program_type": "internship"},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-program-type="internship"')
+        self.assertContains(response, 'data-course-slug="java-internship-45-days"')
+        self.assertContains(response, 'data-course-slug="python-internship-45-days"')
+        self.assertContains(response, 'data-course-slug="ai-ml-internship-45-days"')
+        self.assertContains(response, 'data-course-slug="aws-internship-45-days"')
+        internship_backgrounds = {
+            internship["slug"]: internship["background_image"]
+            for internship in response.context["internships"]
+        }
+        self.assertEqual(
+            internship_backgrounds["java-internship-45-days"],
+            "Registerpage/java-training-institute.webp",
+        )
+        self.assertEqual(
+            internship_backgrounds["python-internship-45-days"],
+            "Registerpage/python-training-leadpro.webp",
+        )
+        self.assertEqual(
+            internship_backgrounds["ai-ml-internship-45-days"],
+            "Registerpage/ai_ml background.jpg",
+        )
+        self.assertEqual(
+            internship_backgrounds["aws-internship-45-days"],
+            "Registerpage/aws background.jpg",
+        )
+
+    def test_selected_internship_registration_routes_to_that_program(self):
+        response = self.client.post(
+            reverse("student_registration"),
+            {
+                **self.valid_registration,
+                "program_type": "internship",
+                "course": "aws-internship-45-days",
+            },
+        )
+
+        self.assertRedirects(
+            response,
+            reverse(
+                "course_interest",
+                kwargs={"course_slug": "aws-internship-45-days"},
+            ),
+            fetch_redirect_response=False,
+        )
+
+    def test_internship_selection_prompts_for_internship_registration(self):
+        response = self.client.get(
+            reverse(
+                "course_interest",
+                kwargs={"course_slug": "java-internship-45-days"},
+            )
+        )
+
+        self.assertRedirects(
+            response,
+            f"{reverse('student_registration')}?program_type=internship",
+        )
 
     def test_invalid_mobile_number_is_rejected(self):
         for mobile_number in ("12345", "abcdefghij"):
@@ -249,6 +409,16 @@ class StudentRegistrationWorkflowTests(TestCase):
             response,
             "Python Full Stack Development with AI/ML and AWS",
         )
+        self.assertContains(response, "program-card-java")
+        self.assertContains(response, "program-card-python")
+        self.assertContains(
+            response,
+            'class="program-card-background" src="/static/Registerpage/java-training-institute.webp"',
+        )
+        self.assertContains(
+            response,
+            'class="program-card-background" src="/static/Registerpage/python-training-leadpro.webp"',
+        )
         self.assertContains(response, "Spring Boot and dependency injection")
         self.assertContains(response, "Django REST Framework")
         self.assertContains(response, "View all 48 topics")
@@ -286,5 +456,26 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertIn("College Name: Osmania University", message)
         self.assertIn("Mobile Number: 9876543210", message)
         self.assertIn("Passed Out Year: 2025", message)
-        self.assertIn("Interested Course: Python Full Stack", message)
+        self.assertIn("Interested Program: Python Full Stack", message)
+        self.assertIn("Program Type: Six-month coaching course", message)
+        self.assertNotIn(REGISTRATION_SESSION_KEY, self.client.session)
+
+    def test_internship_interest_encodes_program_and_duration(self):
+        self.client.post(
+            reverse("student_registration"),
+            {**self.valid_registration, "program_type": "internship"},
+        )
+
+        response = self.client.get(
+            reverse(
+                "course_interest",
+                kwargs={"course_slug": "python-internship-45-days"},
+            )
+        )
+
+        self.assertEqual(response.status_code, 302)
+        message = parse_qs(urlsplit(response.headers["Location"]).query)["text"][0]
+        self.assertIn("Interested Program: Python Development Internship", message)
+        self.assertIn("Program Type: Internship", message)
+        self.assertIn("Duration: 45 days", message)
         self.assertNotIn(REGISTRATION_SESSION_KEY, self.client.session)

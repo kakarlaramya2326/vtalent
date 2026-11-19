@@ -1,81 +1,114 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Student Registration | VTalent Institute{% endblock %}
 {% block content %}
 <div class="student-registration-page">
-  <section class="registration-hero">
-    <div class="container registration-hero-inner">
-      <div class="registration-hero-copy">
-        <span class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span>YOUR NEXT CHAPTER STARTS HERE</span>
-        <h1>Big goals begin<br>with <span>one small step.</span></h1>
-        <p>Tell us a little about yourself and discover a learning path built around where you want to go.</p>
-        <a class="registration-hero-link" href="#registration-form">Let’s get started <i class="bi bi-arrow-down-right" aria-hidden="true"></i></a>
-      </div>
-      <div class="registration-hero-art" aria-hidden="true">
-        <div class="hero-art-orbit hero-art-orbit-one"></div>
-        <div class="hero-art-orbit hero-art-orbit-two"></div>
-        <div class="hero-art-card">
-          <span class="hero-art-kicker">THE VTALENT WAY</span>
-          <span class="hero-art-number">01<span>/02</span></span>
-          <span class="hero-art-title">A brighter future<br>starts with a first step.</span>
-          <div class="hero-art-footer"><span></span><span></span><span></span><small>YOUR JOURNEY</small></div>
-        </div>
-        <span class="hero-art-sparkle"><i class="bi bi-stars"></i></span>
-      </div>
+  <div class="registration-modal-screen">
+    <div class="registration-modal-backdrop" aria-hidden="true">
+      <img src="{% static 'Registerpage/RegisterPage.avif' %}" alt="">
     </div>
-  </section>
-  <section class="section-space registration-section">
-    <div class="container registration-layout">
-      <aside class="registration-aside">
-        <span class="step-badge">YOUR JOURNEY <span> / 02</span></span>
-        <h2>Simple steps.<br>Exciting possibilities.</h2>
-        <p>Share your details, explore our programs, and find a course that feels right for you.</p>
-        <div class="registration-steps" aria-label="Registration steps">
-          <div class="registration-step registration-step-active"><span><i class="bi bi-check2" aria-hidden="true"></i></span><div><strong>Your details</strong><small>Start with the basics</small></div></div>
-          <div class="registration-step"><span class="step-muted">2</span><div><strong>Explore courses</strong><small>Find your next direction</small></div></div>
+    <section class="registration-modal" role="dialog" aria-modal="true" aria-labelledby="registration-modal-title" tabindex="-1">
+      <div class="registration-modal-showcase">
+        <div class="registration-showcase-heading">
+          <span class="registration-showcase-kicker"><i class="bi bi-stars" aria-hidden="true"></i> YOUR NEXT CHAPTER</span>
+          <h1>Build skills.<br><span>Build your future.</span></h1>
+          <p>Choose a six-month full-stack course or start with a focused 45-day internship.</p>
         </div>
-        <div class="registration-note">
-          <span class="registration-note-icon"><i class="bi bi-chat-heart" aria-hidden="true"></i></span>
-          <p><strong>Need a hand?</strong><br>Our team is happy to help you find your way.</p>
+        <div class="registration-course-set" data-program-type="coaching"{% if form.program_type.value == 'internship' %} hidden{% endif %}>
+          <div class="registration-course-choices" aria-label="Choose a six-month course">
+            <button class="registration-course-choice registration-course-choice-java{% if selected_course_slug == 'java-full-stack' %} is-selected{% endif %}" type="button" data-program-type="coaching" data-course-slug="java-full-stack" data-course-label="Java Full Stack" data-course-duration="6 months" aria-pressed="{% if selected_course_slug == 'java-full-stack' %}true{% else %}false{% endif %}">
+              <img class="registration-course-image" src="{% static 'Registerpage/java-training-institute.webp' %}" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">6 months <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">FULL STACK DEVELOPMENT</span>
+              <span class="registration-course-name">Java Full Stack Development with AI Integration and AWS Cloud</span>
+              <span class="registration-course-description">Learn Java programming from fundamentals to advanced concepts, front-end development, database management, back-end application development using Spring Boot, REST APIs, AI integration, and AWS Cloud deployment. Build real-time projects and prepare for technical interviews with placement assistance.</span>
+            </button>
+            <button class="registration-course-choice registration-course-choice-python{% if selected_course_slug == 'python-full-stack' %} is-selected{% endif %}" type="button" data-program-type="coaching" data-course-slug="python-full-stack" data-course-label="Python Full Stack" data-course-duration="6 months" aria-pressed="{% if selected_course_slug == 'python-full-stack' %}true{% else %}false{% endif %}">
+              <img class="registration-course-image" src="{% static 'Registerpage/python-training-leadpro.webp' %}" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">6 months <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">FULL STACK DEVELOPMENT</span>
+              <span class="registration-course-name">Python Full Stack Development with AI/ML and AWS</span>
+              <span class="registration-course-description">Learn Python programming, front-end development, databases, Django web development, REST APIs, AI/ML fundamentals, and AWS Cloud. Build real-time projects and prepare for technical interviews with placement assistance.</span>
+            </button>
+          </div>
         </div>
-      </aside>
-      <div class="form-card" id="registration-form">
-        <div class="form-card-heading">
-          <span class="form-icon"><i class="bi bi-person-vcard" aria-hidden="true"></i></span>
-          <div><span class="form-step-label">STEP 01 OF 02</span><h2>Let’s get to know you</h2><p>Fill in your details to explore our courses.</p></div>
+        <div class="registration-course-set" data-program-type="internship"{% if form.program_type.value != 'internship' %} hidden{% endif %}>
+          <div class="registration-course-choices registration-internship-choices" aria-label="Choose a 45-day internship">
+            {% for internship in internships %}
+            <button class="registration-course-choice registration-course-choice-internship{% if internship.slug == 'java-internship-45-days' %} registration-course-choice-java{% elif internship.slug == 'python-internship-45-days' %} registration-course-choice-python{% endif %}{% if selected_course_slug == internship.slug %} is-selected{% endif %}" type="button" data-program-type="internship" data-course-slug="{{ internship.slug }}" data-course-label="{{ internship.short_name }}" data-course-duration="{{ internship.duration }}" aria-pressed="{% if selected_course_slug == internship.slug %}true{% else %}false{% endif %}">
+              {% if internship.background_image %}<img class="registration-course-image" src="{% static internship.background_image %}" alt="">{% else %}<span class="registration-course-placeholder"><i class="bi {{ internship.icon }}" aria-hidden="true"></i></span>{% endif %}
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">{{ internship.duration }} <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">{{ internship.name }}</span>
+              <span class="registration-course-description">{{ internship.description }}</span>
+            </button>
+            {% endfor %}
+          </div>
         </div>
-        <div class="form-progress" role="progressbar" aria-label="Registration progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span></span></div>
-        {% if selected_course %}<div class="selected-course-banner"><i class="bi bi-bookmark-star" aria-hidden="true"></i> Interested in <strong>{{ selected_course.name }}</strong></div>{% endif %}
+        <div class="registration-showcase-footer">
+          <span><i class="bi bi-kanban" aria-hidden="true"></i> Project-based learning</span>
+          <span><i class="bi bi-person-check" aria-hidden="true"></i> Career preparation</span>
+        </div>
+      </div>
+
+      <div class="registration-modal-form">
+        <a class="registration-modal-close" href="{% url 'home' %}" aria-label="Close registration and return home" title="Return home">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </a>
+        <div class="registration-form-heading">
+          <span class="registration-form-kicker">REGISTRATION <span> / YOUR DETAILS</span></span>
+          <h2 id="registration-modal-title">Let’s get to know you</h2>
+          <p>Pick your learning path and tell us how to reach you.</p>
+        </div>
+        <div class="registration-modal-progress" aria-hidden="true"><span></span></div>
+
         <form method="post" action="{% url 'student_registration' %}" novalidate>
           {% csrf_token %}
-          {% if selected_course_slug %}<input type="hidden" name="course" value="{{ selected_course_slug }}">{% endif %}
-          <div class="mb-3 registration-field">
+          <input id="selected-course" type="hidden" name="course" value="{{ selected_course_slug|default:'' }}">
+          <div class="registration-program-field">
+            <div class="registration-field-label">{{ form.program_type.label }}</div>
+            <div class="program-type-options">{{ form.program_type }}</div>
+            {% for error in form.program_type.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            <p class="registration-course-status" aria-live="polite">
+              {% if selected_internship %}Selected: {{ selected_internship.short_name }} · 45-day internship{% elif selected_course %}Selected: {{ selected_course.short_name }} · 6-month course{% elif form.program_type.value == 'internship' %}Choose a 45-day internship card above.{% else %}Choose a course card or select a 45-day internship.{% endif %}
+            </p>
+          </div>
+
+          {% if selected_course %}
+          <div class="selected-course-banner"><i class="bi bi-bookmark-star" aria-hidden="true"></i> Interested in <strong>{{ selected_course.name }}</strong></div>
+          {% endif %}
+
+          <div class="registration-field">
             <label class="form-label" for="{{ form.student_name.id_for_label }}">{{ form.student_name.label }}</label>
             <div class="field-with-icon"><i class="bi bi-person" aria-hidden="true"></i>{{ form.student_name }}</div>
             {% for error in form.student_name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
           </div>
-          <div class="mb-3 registration-field">
+          <div class="registration-field">
             <label class="form-label" for="{{ form.college_name.id_for_label }}">{{ form.college_name.label }}</label>
             <div class="field-with-icon"><i class="bi bi-mortarboard" aria-hidden="true"></i>{{ form.college_name }}</div>
             {% for error in form.college_name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
           </div>
           <div class="row">
-            <div class="col-md-7 mb-3 registration-field">
+            <div class="col-md-7 registration-field">
               <label class="form-label" for="{{ form.mobile_number.id_for_label }}">{{ form.mobile_number.label }}</label>
               <div class="field-with-icon"><i class="bi bi-phone" aria-hidden="true"></i>{{ form.mobile_number }}</div>
               {% for error in form.mobile_number.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
             </div>
-            <div class="col-md-5 mb-3 registration-field">
+            <div class="col-md-5 registration-field">
               <label class="form-label" for="{{ form.passed_out_year.id_for_label }}">{{ form.passed_out_year.label }}</label>
               <div class="field-with-icon"><i class="bi bi-calendar3" aria-hidden="true"></i>{{ form.passed_out_year }}</div>
               {% for error in form.passed_out_year.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
             </div>
           </div>
           {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
-          <button class="btn btn-primary btn-lg w-100 form-submit" type="submit">Continue to courses <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></button>
-          <p class="form-privacy"><i class="bi bi-shield-check" aria-hidden="true"></i> Your details are only used to prepare your course enquiry.</p>
+          <button class="btn btn-primary w-100 form-submit" type="submit"><span class="registration-submit-label">Continue to courses</span><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+          <p class="form-privacy"><i class="bi bi-shield-check" aria-hidden="true"></i> Your details are only used to prepare your program enquiry.</p>
         </form>
       </div>
-    </div>
-</section>
+    </section>
+  </div>
 </div>
 {% endblock %}

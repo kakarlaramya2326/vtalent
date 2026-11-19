@@ -1,3 +1,4 @@
+{% load static %}
 <section class="section-space courses-section one-page-section" id="courses">
   <div class="container">
     <div class="courses-intro">
@@ -10,29 +11,35 @@
 
     <div class="course-program-list">
       {% for course in full_stack_courses %}
-      <article class="program-card">
-        <div class="program-card-main">
-          <div class="program-heading">
-            <div class="course-icon"><i class="bi {{ course.icon }}"></i></div>
-            <span class="program-number">{{ course.number }}</span>
-          </div>
-          <span class="program-category">{{ course.category }}</span>
-          <h2>{{ course.name }}</h2>
-          <div class="program-duration"><i class="bi bi-clock"></i> {{ course.duration }}</div>
-          <p class="program-description">{{ course.description }}</p>
-          <div class="curriculum-block">
-            <h3><i class="bi bi-journal-check"></i> What you’ll learn</h3>
-            <details class="curriculum-details">
-              <summary>View all {{ course.topic_count }} topics <i class="bi bi-chevron-down"></i></summary>
-              <div class="curriculum-modules">
-                {% for module in course.modules %}
-                <section class="curriculum-module">
-                  <h4><span>Module {{ forloop.counter|stringformat:"02d" }}</span>{{ module.name }}</h4>
-                  <ul>{% for topic in module.topics %}<li>{{ topic }}</li>{% endfor %}</ul>
-                </section>
-                {% endfor %}
+        <article class="program-card program-card-with-image{% if course.slug == 'java-full-stack' %} program-card-java{% elif course.slug == 'python-full-stack' %} program-card-python{% endif %}">
+          <div class="program-card-hero">
+            <img class="program-card-background" src="{% static course.background_image %}" alt="" aria-hidden="true">
+            <span class="program-card-shade" aria-hidden="true"></span>
+            <div class="program-card-main">
+              <div class="program-heading">
+                <div class="course-icon"><i class="bi {{ course.icon }}"></i></div>
+                <span class="program-number">{{ course.number }}</span>
               </div>
-            </details>
+              <span class="program-category">{{ course.category }}</span>
+              <h2>{{ course.name }}</h2>
+              <div class="program-duration"><i class="bi bi-clock"></i> {{ course.duration }}</div>
+              <p class="program-description">{{ course.description }}</p>
+            </div>
+          </div>
+          <div class="program-card-details">
+            <div class="curriculum-block">
+              <h3><i class="bi bi-journal-check"></i> What you’ll learn</h3>
+              <details class="curriculum-details">
+                <summary>View all {{ course.topic_count }} topics <i class="bi bi-chevron-down"></i></summary>
+                <div class="curriculum-modules">
+                  {% for module in course.modules %}
+                  <section class="curriculum-module">
+                    <h4><span>Module {{ forloop.counter|stringformat:"02d" }}</span>{{ module.name }}</h4>
+                    <ul>{% for topic in module.topics %}<li>{{ topic }}</li>{% endfor %}</ul>
+                  </section>
+                  {% endfor %}
+                </div>
+              </details>
           </div>
           <a class="btn btn-primary course-button" href="{% url 'course_interest' course_slug=course.slug %}">Select this course <i class="bi bi-arrow-right"></i></a>
         </div>

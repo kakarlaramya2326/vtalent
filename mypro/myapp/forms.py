@@ -4,6 +4,15 @@ from django import forms
 
 
 class StudentRegistrationForm(forms.Form):
+    program_type = forms.ChoiceField(
+        label="Choose your learning path",
+        choices=(
+            ("internship", "45-Day Internship"),
+            ("coaching", "6-Month Coaching"),
+        ),
+        widget=forms.RadioSelect,
+        error_messages={"required": "Choose an internship or six-month coaching."},
+    )
     student_name = forms.CharField(
         label="Student Name",
         max_length=100,

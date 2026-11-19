@@ -2,13 +2,16 @@
 <section class="section-space one-page-section" id="about-institute">
   <div class="container institute-layout">
     <div class="institute-logo-wrap">
-      <img class="institute-logo-image" src="{% static 'vtalent.jpg' %}" alt="VTalent — Value for your Dream">
+      <video class="institute-video" autoplay muted loop playsinline preload="metadata" aria-label="VTalent Institute introduction video" poster="{% static 'vtalent.jpg' %}">
+        <source src="{% static 'vtalennanimation/vtalent(video).mp4' %}" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
     </div>
     <div class="institute-copy">
       <span class="eyebrow">WHO WE ARE</span>
       <h2>Helping talent grow into opportunity.</h2>
       <p>VTalent is a Hyderabad-based training and career development institute. We work to align professional skills with business requirements and support learners as they work toward their aspirations.</p>
-      <p>Our programs include Java Full Stack with AI integration and Python Full Stack with AI/ML. Training is intended for learners building practical technology skills, including graduates from CSE, IT, ECE, and EEE streams.</p>
+      <p>Our programs include Java Full Stack with AI integration and Python Full Stack with AI/ML. We welcome newly passed-out students from CSE, IT, ECE, and EEE who want to build practical technology skills.</p>
       <a class="btn btn-primary" href="{% url 'student_registration' %}">Explore registration <i class="bi bi-arrow-right ms-2"></i></a>
     </div>
   </div>
