@@ -44,6 +44,7 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, "vtalennanimation/vtalent(video).mp4")
         self.assertContains(response, 'id="highlights"')
         self.assertContains(response, "Training beyond")
+        self.assertContains(response, "THE ONE AND ONLY INSTITUTION")
         self.assertContains(response, "A dedicated institute for eligible graduates")
         self.assertContains(response, "eligible CSE, IT, and ECE graduates only")
         self.assertContains(response, 'class="hero-highlights-track"')
