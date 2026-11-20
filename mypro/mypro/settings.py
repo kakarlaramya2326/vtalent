@@ -11,47 +11,39 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 import os
-import warnings
 from pathlib import Path
 
-import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-DEBUG_SETTING = os.environ.get("DJANGO_DEBUG")
-DEBUG = (
-    DEBUG_SETTING.lower() in {"1", "true", "yes"}
-    if DEBUG_SETTING is not None
-    else not os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-)
+DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() in {"1", "true", "yes"}
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
-    if not DEBUG:
-        raise ImproperlyConfigured(
-            "Set DJANGO_SECRET_KEY in the environment when DEBUG is disabled."
-        )
-    SECRET_KEY = "local-development-only-key"
+    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY in the environment.")
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ["vtalent.in", "www.vtalent.in", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS.extend(
     host.strip()
     for host in os.environ.get("ALLOWED_HOSTS", "").split(",")
     if host.strip()
-]
-if not ALLOWED_HOSTS:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+)
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://vtalent.in",
+    "https://www.vtalent.in",
+]
+CSRF_TRUSTED_ORIGINS.extend(
     origin.strip().rstrip("/")
     for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
     if origin.strip()
-]
+)
 if RENDER_EXTERNAL_HOSTNAME:
     CSRF_TRUSTED_ORIGINS.append(f"https://{RENDER_EXTERNAL_HOSTNAME}")
 
@@ -70,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,8 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if not DEBUG:
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'mypro.urls'
 
@@ -103,39 +94,13 @@ WSGI_APPLICATION = 'mypro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-if DATABASE_URL:
-    DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
-elif DEBUG or os.environ.get("DJANGO_ALLOW_SQLITE", "").lower() in {
-    "1",
-    "true",
-    "yes",
-}:
-    DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': ':memory:',
     }
 }
-       
-    if not DEBUG:
-        warnings.warn(
-            "DATABASE_URL is unset; using temporary SQLite. "
-            "Database data will be lost when the Render instance is replaced.",
-            RuntimeWarning,
-            stacklevel=2,
-        )
-else:
-    raise ImproperlyConfigured(
-        "Set DATABASE_URL or explicitly enable temporary SQLite with "
-        "DJANGO_ALLOW_SQLITE=true."
-    )
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 
 # Password validation
@@ -172,7 +137,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {

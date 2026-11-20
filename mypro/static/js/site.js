@@ -126,17 +126,7 @@
   };
 
   const updateSubmitLabel = () => {
-    const selectedCourse = courseButtons.find(
-      (button) => button.dataset.courseSlug === courseInput.value,
-    );
-
-    if (selectedCourse) {
-      submitLabel.textContent = `Continue with ${selectedCourse.dataset.courseLabel}`;
-    } else if (getProgramType() === "internship") {
-      submitLabel.textContent = "Explore internships";
-    } else {
-      submitLabel.textContent = "Continue to courses";
-    }
+    submitLabel.textContent = "Continue to WhatsApp";
   };
 
   const selectCourse = (slug) => {

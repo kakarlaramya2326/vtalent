@@ -311,7 +311,6 @@ YOUTUBE_INTERVIEWS = [
 ]
 
 WHATSAPP_NUMBER = "918977149444"
-REGISTRATION_SESSION_KEY = "student_registration"
 PLACEMENT_PHOTO_DIRECTORY = (
     Path(__file__).resolve().parent.parent / "static" / "pplacement pics"
 )
@@ -377,20 +376,45 @@ def student_registration(request):
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
             registration = form.cleaned_data
-            request.session[REGISTRATION_SESSION_KEY] = registration
-            if registration["program_type"] == "internship":
-                if selected_internship is not None:
-                    return redirect(
-                        "course_interest",
-                        course_slug=selected_internship["slug"],
-                    )
-                return redirect("internships")
-            if selected_course is not None:
-                return redirect(
-                    "course_interest",
-                    course_slug=selected_course["slug"],
+            is_internship = registration["program_type"] == "internship"
+            selected_program = (
+                selected_internship if is_internship else selected_course
+            )
+            program_name = (
+                selected_program["name"]
+                if selected_program
+                else (
+                    "45-day internship programs"
+                    if is_internship
+                    else "Six-month coaching courses"
                 )
-            return redirect("courses")
+            )
+            program_type = (
+                "Internship" if is_internship else "Six-month coaching course"
+            )
+            duration = (
+                selected_program["duration"]
+                if selected_program
+                else ("45 days" if is_internship else "6 months")
+            )
+            message = (
+                "Hello VTalent Institute,\n\n"
+                "I am interested in joining your institute.\n\n"
+                "Student Details:\n"
+                f"Name: {registration['student_name']}\n"
+                f"College Name: {registration['college_name']}\n"
+                f"Mobile Number: {registration['mobile_number']}\n"
+                f"Passed Out Year: {registration['passed_out_year']}\n\n"
+                f"Interested Program: {program_name}\n"
+                f"Program Type: {program_type}\n"
+                f"Duration: {duration}\n\n"
+                "Please share the program details, fees, batch timings and admission information.\n\n"
+                "Thank you."
+            )
+            whatsapp_url = (
+                f"https://wa.me/{WHATSAPP_NUMBER}?text={quote(message, safe='')}"
+            )
+            return redirect(whatsapp_url)
     else:
         initial = {}
         requested_program_type = request.GET.get("program_type")
@@ -447,55 +471,23 @@ def student_placements(request):
 
 
 def course_interest(request, course_slug):
-    registration = request.session.get(REGISTRATION_SESSION_KEY)
-    if not registration:
-        if any(item["slug"] == course_slug for item in INTERNSHIPS):
-            return redirect(
-                f"{reverse('student_registration')}?program_type=internship"
-            )
-        return redirect("student_registration")
-
-    course = next(
-        (item for item in COURSES if item["slug"] == course_slug),
-        None,
-    )
     internship = next(
         (item for item in INTERNSHIPS if item["slug"] == course_slug),
         None,
     )
-    program_type = registration.get("program_type", "coaching")
+    course = next((item for item in COURSES if item["slug"] == course_slug), None)
     if internship is not None:
-        if program_type != "internship":
-            return redirect("courses")
-        selected_program = internship
-        program_label = "Internship"
+        program_type = "internship"
     elif course is not None:
-        if program_type != "coaching":
-            return redirect("internships")
-        selected_program = course
-        program_label = "Six-month coaching course"
+        program_type = "coaching"
     else:
-        return redirect("internships" if program_type == "internship" else "courses")
+        return redirect("courses")
 
-    message = (
-        "Hello VTalent Institute,\n\n"
-        "I am interested in joining your institute.\n\n"
-        "Student Details:\n"
-        f"Name: {registration['student_name']}\n"
-        f"College Name: {registration['college_name']}\n"
-        f"Mobile Number: {registration['mobile_number']}\n"
-        f"Passed Out Year: {registration['passed_out_year']}\n\n"
-        f"Interested Program: {selected_program['name']}\n"
-        f"Program Type: {program_label}\n"
-        f"Duration: {selected_program['duration']}\n\n"
-        "Please share the program details, fees, batch timings and admission information.\n\n"
-        "Thank you."
+    registration_url = (
+        f"{reverse('student_registration')}?program_type={program_type}"
+        f"&course={quote(course_slug, safe='')}"
     )
-    whatsapp_url = (
-        f"https://wa.me/{WHATSAPP_NUMBER}?text={quote(message, safe='')}"
-    )
-    request.session.pop(REGISTRATION_SESSION_KEY, None)
-    return redirect(whatsapp_url)
+    return redirect(registration_url)
 
 
 def about_ceo(request):
