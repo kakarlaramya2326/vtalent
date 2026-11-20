@@ -16,7 +16,7 @@ COURSES = [
         "short_name": "Python Full Stack",
         "description": "Learn Python programming, front-end development, databases, Django web development, REST APIs, AI/ML fundamentals, and AWS Cloud. Build real-time projects and prepare for technical interviews with placement assistance.",
         "duration": "6 months",
-        "background_image": "Registerpage/python-training-leadpro.webp",
+        "background_image": "Registerpage/Neon Python Code Horizon.png",
         "topic_count": 37,
         "icon": "bi-code-slash",
         "modules": [
@@ -191,7 +191,7 @@ INTERNSHIPS = [
         "name": "Python Development Internship",
         "short_name": "Python Internship",
         "duration": "45 days",
-        "background_image": "Registerpage/python-training-leadpro.webp",
+        "background_image": "Registerpage/Neon Python Code Horizon.png",
         "icon": "bi-filetype-py",
         "description": "Learn core Python subjects through guided coding practice and a hands-on project.",
         "topics": [

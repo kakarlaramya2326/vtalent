@@ -122,6 +122,9 @@ class StudentRegistrationWorkflowTests(TestCase):
         self.assertContains(response, 'href="#courses"')
         self.assertContains(response, 'href="#placements"')
         self.assertContains(response, "Prasad Mandava")
+        self.assertContains(response, "A Vision to Empower Telugu Talent and Transform Careers")
+        self.assertContains(response, "3,000+ students placed in the IT industry by 2024")
+        self.assertContains(response, "represented across the global IT industry")
         self.assertContains(response, "Let’s start a conversation.")
 
     def test_home_programs_show_background_courses_and_scrollable_internships(self):
@@ -142,7 +145,7 @@ class StudentRegistrationWorkflowTests(TestCase):
         }
         self.assertEqual(
             course_backgrounds["python-full-stack"],
-            "Registerpage/python-training-leadpro.webp",
+            "Registerpage/Neon Python Code Horizon.png",
         )
         self.assertEqual(
             course_backgrounds["java-full-stack"],
@@ -285,7 +288,11 @@ class StudentRegistrationWorkflowTests(TestCase):
         )
         self.assertEqual(
             internship_backgrounds["python-internship-45-days"],
-            "Registerpage/python-training-leadpro.webp",
+            "Registerpage/Neon Python Code Horizon.png",
+        )
+        self.assertContains(
+            response,
+            'src="/static/Registerpage/Neon%20Python%20Code%20Horizon.png"',
         )
         self.assertEqual(
             internship_backgrounds["ai-ml-internship-45-days"],
@@ -418,7 +425,7 @@ class StudentRegistrationWorkflowTests(TestCase):
         )
         self.assertContains(
             response,
-            'class="program-card-background" src="/static/Registerpage/python-training-leadpro.webp"',
+            'class="program-card-background" src="/static/Registerpage/Neon%20Python%20Code%20Horizon.png"',
         )
         self.assertContains(response, "Spring Boot and dependency injection")
         self.assertContains(response, "Django REST Framework")
