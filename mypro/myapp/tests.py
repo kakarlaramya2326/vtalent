@@ -5,7 +5,7 @@ from urllib.parse import parse_qs, urlsplit
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.management import call_command
-from django.test import TestCase, override_settings
+from django.test import SimpleTestCase, override_settings
 from django.urls import reverse
 
 
@@ -20,7 +20,7 @@ from django.urls import reverse
         },
     }
 )
-class StudentRegistrationWorkflowTests(TestCase):
+class StudentRegistrationWorkflowTests(SimpleTestCase):
     def setUp(self):
         self.valid_registration = {
             "program_type": "coaching",

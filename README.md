@@ -14,7 +14,7 @@ Local runs default to debug mode and a development-only secret when no Render ho
 
 1. Create a Blueprint from this repository, or update your existing Web Service to use the commands below.
 2. Set `DJANGO_SECRET_KEY` to a secure secret and `DJANGO_DEBUG` to `false`. The Blueprint generates the secret automatically.
-3. The site uses in-memory SQLite only for Django's default database connection; it does not persist data or require an external database. Student registration is sent directly to WhatsApp and is not saved by the site.
+3. The site has no configured database, does not persist visitor data, and does not require database migrations. Student registration is sent directly to WhatsApp and is not saved by the site.
 4. The `vtalent.in`, `www.vtalent.in`, and Render hostnames are allowed automatically. Configure the custom domain in Render and point its DNS records to the values Render provides.
 5. If configuring the service in the Render Dashboard, use the repository root as its root directory. The build must run `collectstatic` successfully before Gunicorn starts; otherwise WhiteNoise's manifest storage can raise a server error while rendering templates.
 
