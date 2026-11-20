@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: vtalent-admissions
+    name: vtalent
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt && python mypro/manage.py collectstatic --noinput

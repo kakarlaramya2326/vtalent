@@ -1,8 +1,10 @@
 from datetime import date
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlsplit
 
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.core.management import call_command
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
@@ -44,6 +46,27 @@ class StudentRegistrationWorkflowTests(TestCase):
                 self.assertContains(response, 'class="reading-progress"')
                 self.assertContains(response, 'class="back-to-top"')
                 self.assertContains(response, 'rel="icon"')
+
+    def test_homepage_renders_with_production_static_manifest(self):
+        production_storages = {
+            "default": {
+                "BACKEND": "django.core.files.storage.FileSystemStorage",
+            },
+            "staticfiles": {
+                "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+            },
+        }
+
+        with TemporaryDirectory() as static_root:
+            with override_settings(STATIC_ROOT=static_root, STORAGES=production_storages):
+                call_command("collectstatic", interactive=False, verbosity=0)
+                response = self.client.get(reverse("home"), secure=True)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(
+                    response,
+                    staticfiles_storage.url("vtalent-logo.png"),
+                )
 
     def test_homepage_shows_course_discovery_and_social_sections(self):
         response = self.client.get(reverse("home"))
