@@ -43,6 +43,7 @@ class StudentRegistrationWorkflowTests(TestCase):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'class="reading-progress"')
                 self.assertContains(response, 'class="back-to-top"')
+                self.assertContains(response, 'rel="icon"')
 
     def test_homepage_shows_course_discovery_and_social_sections(self):
         response = self.client.get(reverse("home"))

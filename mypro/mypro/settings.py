@@ -19,10 +19,19 @@ from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() in {"1", "true", "yes"}
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+DEBUG_SETTING = os.environ.get("DJANGO_DEBUG")
+DEBUG = (
+    DEBUG_SETTING.lower() in {"1", "true", "yes"}
+    if DEBUG_SETTING is not None
+    else not RENDER_EXTERNAL_HOSTNAME
+)
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
-    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY in the environment.")
+    if DEBUG:
+        SECRET_KEY = "local-development-only-key"
+    else:
+        raise ImproperlyConfigured("Set DJANGO_SECRET_KEY in the environment.")
 
 ALLOWED_HOSTS = ["vtalent.in", "www.vtalent.in", "localhost", "127.0.0.1"]
 ALLOWED_HOSTS.extend(
@@ -31,7 +40,6 @@ ALLOWED_HOSTS.extend(
     if host.strip()
 )
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 

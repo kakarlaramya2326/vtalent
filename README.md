@@ -2,15 +2,13 @@
 
 ## Run locally
 
-From the repository root, set a local secret and enable debug mode:
+From the repository root:
 
 ```powershell
-$env:DJANGO_SECRET_KEY = .\myvenv\Scripts\python.exe -c "import secrets; print(secrets.token_urlsafe(50))"
-$env:DJANGO_DEBUG = "true"
 .\myvenv\Scripts\python.exe mypro\manage.py runserver
 ```
 
-Install dependencies first with `pip install -r requirements.txt`. No migration command or persistent database is needed.
+Local runs default to debug mode and a development-only secret when no Render hostname is present. In production, set `DJANGO_DEBUG=false` and provide `DJANGO_SECRET_KEY`. Install dependencies first with `pip install -r requirements.txt`. No migration command or persistent database is needed.
 
 ## Deploy to Render
 
