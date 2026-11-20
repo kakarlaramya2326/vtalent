@@ -13,8 +13,8 @@ Local runs default to development mode. Install dependencies first with `pip ins
 
 ## Deploy to Render
 
-1. Create a persistent PostgreSQL database in Render.
-2. Create a Blueprint from this repository and provide that database's **internal** connection URL for `DATABASE_URL` when prompted.
-3. Keep `DJANGO_DEBUG` set to `false`. Render generates `DJANGO_SECRET_KEY`; the app automatically trusts the Render hostname and configures HTTPS.
+1. Create a Blueprint from this repository, or update your existing Web Service's build and start commands to match `render.yaml`.
+2. Keep `DJANGO_DEBUG` set to `false`. Render generates `DJANGO_SECRET_KEY`; the app automatically trusts the Render hostname and configures HTTPS.
+3. This setup enables temporary SQLite with `DJANGO_ALLOW_SQLITE=true` so the site can start without a separate database. SQLite data, including sessions, is not persistent across Render instance replacements. For persistent data, create Render PostgreSQL, set `DATABASE_URL` to its **internal** connection URL, and remove `DJANGO_ALLOW_SQLITE`.
 
-The Blueprint uses the repository root. Its build command installs dependencies and collects static files; its start command applies database migrations and launches Gunicorn. The SQLite database is only a local development fallback; production requires `DATABASE_URL`.
+The Blueprint uses the repository root. Its build command installs dependencies and collects static files; its start command applies database migrations and launches Gunicorn.

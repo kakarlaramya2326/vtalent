@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 import os
+import warnings
 from pathlib import Path
 
 import dj_database_url
@@ -111,16 +112,28 @@ if DATABASE_URL:
             conn_health_checks=True,
         )
     }
-elif DEBUG:
+elif DEBUG or os.environ.get("DJANGO_ALLOW_SQLITE", "").lower() in {
+    "1",
+    "true",
+    "yes",
+}:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": BASE_DIR / ("db.sqlite3" if DEBUG else "render.sqlite3"),
         }
     }
+    if not DEBUG:
+        warnings.warn(
+            "DATABASE_URL is unset; using temporary SQLite. "
+            "Database data will be lost when the Render instance is replaced.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
 else:
     raise ImproperlyConfigured(
-        "Set DATABASE_URL to a persistent database when DEBUG is disabled."
+        "Set DATABASE_URL or explicitly enable temporary SQLite with "
+        "DJANGO_ALLOW_SQLITE=true."
     )
 
 
