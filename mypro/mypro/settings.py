@@ -118,11 +118,12 @@ elif DEBUG or os.environ.get("DJANGO_ALLOW_SQLITE", "").lower() in {
     "yes",
 }:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / ("db.sqlite3" if DEBUG else "render.sqlite3"),
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+       
     if not DEBUG:
         warnings.warn(
             "DATABASE_URL is unset; using temporary SQLite. "
