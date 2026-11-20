@@ -27,5 +27,5 @@ pip install -r requirements.txt && python mypro/manage.py collectstatic --noinpu
 Start command:
 
 ```sh
-gunicorn --chdir mypro mypro.wsgi:application --bind 0.0.0.0:$PORT
+python mypro/manage.py collectstatic --noinput && gunicorn --chdir mypro mypro.wsgi:application --bind 0.0.0.0:$PORT
 ```
