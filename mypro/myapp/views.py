@@ -303,11 +303,6 @@ YOUTUBE_INTERVIEWS = [
         "channel": "Vtalent Hyd",
         "video_id": "ObGBTAsR2E0",
     },
-    {
-        "title": "Best Career Advice in IT Industry You’ll Ever Get!",
-        "channel": "Vtalent IT Academy",
-        "video_id": "OxSGJ3HYm1Q",
-    },
 ]
 
 WHATSAPP_NUMBER = "918977149444"

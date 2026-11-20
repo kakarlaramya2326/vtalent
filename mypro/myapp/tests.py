@@ -113,17 +113,13 @@ class StudentRegistrationWorkflowTests(SimpleTestCase):
             response,
             "https://i.ytimg.com/vi/ObGBTAsR2E0/hqdefault.jpg",
         )
-        self.assertContains(
-            response,
-            "https://i.ytimg.com/vi/OxSGJ3HYm1Q/hqdefault.jpg",
-        )
         self.assertContains(response, "Watch on YouTube")
         self.assertNotContains(response, "<iframe")
         self.assertContains(
             response,
             "Before Joining Any IT Institute, Watch This!",
         )
-        self.assertContains(
+        self.assertNotContains(
             response,
             "Best Career Advice in IT Industry You’ll Ever Get!",
         )
