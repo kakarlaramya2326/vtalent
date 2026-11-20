@@ -59,7 +59,9 @@
     <div class="container footer-main">
       <div class="footer-brand">
         <a class="brand brand-light" href="{% if request.resolver_match.url_name == 'home' %}#home{% else %}{% url 'home' %}#home{% endif %}" aria-label="VTalent Institute home">
-          <img class="brand-logo" src="{% static 'vtalent-logo.png' %}" alt="VTalent Institute">
+          
+
+            <img src="{% static 'vtalent-logo.png' %}" alt="VTalent Logo">
         </a>
         <p>Training and career development to help learners build skills for their next opportunity.</p>
       </div>
