@@ -2,12 +2,23 @@ from datetime import date
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlsplit
 
-from django.test import TestCase
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .views import REGISTRATION_SESSION_KEY
 
 
+@override_settings(
+    STORAGES={
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+)
 class StudentRegistrationWorkflowTests(TestCase):
     def setUp(self):
         self.valid_registration = {
@@ -224,7 +235,10 @@ class StudentRegistrationWorkflowTests(TestCase):
 
         self.assertContains(home_response, "Sample employer")
         self.assertContains(home_response, "Sample reel")
-        self.assertContains(home_response, "images/instagram-reels/sample.jpg")
+        self.assertContains(
+            home_response,
+            staticfiles_storage.url("images/instagram-reels/sample.jpg"),
+        )
         self.assertContains(home_response, "Sample interview")
         self.assertContains(placements_response, "Sample learner")
         self.assertContains(placements_response, "Developer")
@@ -290,9 +304,12 @@ class StudentRegistrationWorkflowTests(TestCase):
             internship_backgrounds["python-internship-45-days"],
             "Registerpage/Neon Python Code Horizon.png",
         )
+        python_image_url = staticfiles_storage.url(
+            "Registerpage/Neon Python Code Horizon.png"
+        )
         self.assertContains(
             response,
-            'src="/static/Registerpage/Neon%20Python%20Code%20Horizon.png"',
+            f'src="{python_image_url}"',
         )
         self.assertEqual(
             internship_backgrounds["ai-ml-internship-45-days"],
@@ -419,13 +436,19 @@ class StudentRegistrationWorkflowTests(TestCase):
         )
         self.assertContains(response, "program-card-java")
         self.assertContains(response, "program-card-python")
-        self.assertContains(
-            response,
-            'class="program-card-background" src="/static/Registerpage/java-training-institute.webp"',
+        java_image_url = staticfiles_storage.url(
+            "Registerpage/java-training-institute.webp"
+        )
+        python_image_url = staticfiles_storage.url(
+            "Registerpage/Neon Python Code Horizon.png"
         )
         self.assertContains(
             response,
-            'class="program-card-background" src="/static/Registerpage/Neon%20Python%20Code%20Horizon.png"',
+            f'class="program-card-background" src="{java_image_url}"',
+        )
+        self.assertContains(
+            response,
+            f'class="program-card-background" src="{python_image_url}"',
         )
         self.assertContains(response, "Spring Boot and dependency injection")
         self.assertContains(response, "Django REST Framework")
