@@ -47,7 +47,7 @@ a { text-decoration: none; }
   right: 12px;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform .2s ease;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
 }
 .site-nav .nav-link:hover,
 .site-nav .nav-link:focus-visible {
@@ -333,7 +333,7 @@ main > section:nth-child(3) { animation-delay: .18s; }
 .feature-card:hover, .course-card:hover, .contact-card:hover {
   border-color: #d3def0;
   box-shadow: 0 20px 42px rgba(25,49,82,.12);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .feature-icon, .contact-icon, .course-icon, .form-icon {
@@ -343,12 +343,12 @@ main > section:nth-child(3) { animation-delay: .18s; }
 .feature-card:hover .feature-icon,
 .contact-card:hover .contact-icon,
 .course-card:hover .course-icon {
-  transform: rotate(-6deg) scale(1.08);
+  transform: rotate(-4deg) scale(1.05);
 }
 
 .btn i, .text-link i, .contact-card a i {
   display: inline-block;
-  transition: transform .22s ease;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
 }
 
 .btn:hover i, .text-link:hover i, .contact-card a:hover i {
@@ -356,7 +356,7 @@ main > section:nth-child(3) { animation-delay: .18s; }
 }
 
 .site-nav .nav-link {
-  transition: background-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+  transition: background-color .3s ease, box-shadow .3s ease, color .3s ease, transform .3s cubic-bezier(.2, .8, .2, 1);
 }
 
 .form-card {
@@ -384,7 +384,7 @@ main > section:nth-child(3) { animation-delay: .18s; }
   border-radius: 17px;
   box-shadow: 0 12px 35px rgba(25,49,82,.045);
   overflow: hidden;
-  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  transition: border-color .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1);
 }
 
 .program-card:nth-child(2) { animation-delay: .12s; }
@@ -403,7 +403,7 @@ main > section:nth-child(3) { animation-delay: .18s; }
 .curriculum-details { background: #f7f9fc; border: 1px solid #e8edf4; border-radius: 10px; }
 .curriculum-details summary { align-items: center; color: var(--blue); cursor: pointer; display: flex; font-size: .88rem; font-weight: 700; justify-content: space-between; list-style: none; padding: 14px 16px; }
 .curriculum-details summary::-webkit-details-marker { display: none; }
-.curriculum-details summary i { transition: transform .2s ease; }
+.curriculum-details summary i { transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
 .curriculum-details[open] summary { border-bottom: 1px solid #e8edf4; }
 .curriculum-details[open] summary i { transform: rotate(180deg); }
 .curriculum-modules { display: grid; gap: 0 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 6px 17px 18px; }
@@ -817,7 +817,7 @@ body {
   gap: 13px;
   min-height: 132px;
   padding: 18px;
-  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  transition: background .32s ease, border-color .32s ease, transform .32s cubic-bezier(.2, .8, .2, 1);
 }
 a.social-empty-card:hover { background: #f3eddf; border-color: #cbb58e; color: var(--ink); transform: translateY(-2px); }
 .social-empty-icon {
@@ -964,7 +964,7 @@ a.social-empty-card:hover { background: #f3eddf; border-color: #cbb58e; color: v
   opacity: 1;
   position: fixed;
   right: max(22px, calc((100vw - 1200px) / 2));
-  transition: background .2s ease, box-shadow .2s ease, opacity .2s ease, transform .2s ease;
+  transition: background .32s ease, box-shadow .32s ease, opacity .32s ease, transform .32s cubic-bezier(.2, .8, .2, 1);
   width: 47px;
   z-index: 1050;
 }
@@ -973,7 +973,7 @@ a.social-empty-card:hover { background: #f3eddf; border-color: #cbb58e; color: v
   background: linear-gradient(145deg, #526b52, #344638);
   box-shadow: 0 12px 28px rgba(30,42,33,.3);
   color: #fff7e8;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .back-to-top:focus-visible {
@@ -1267,12 +1267,12 @@ main > section[id], main section[id] { scroll-margin-top: 92px; }
   font-size: .96rem;
   margin-top: 4px;
   padding: 14px 18px;
-  transition: box-shadow .2s ease, transform .2s ease, background .2s ease;
+  transition: box-shadow .32s ease, transform .32s cubic-bezier(.2, .8, .2, 1), background .32s ease;
 }
 .student-registration-page .form-submit:hover {
   background: linear-gradient(115deg, #92682f, #765126);
   box-shadow: 0 13px 25px rgba(135,95,41,.23);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 .student-registration-page .form-submit:focus-visible { box-shadow: 0 0 0 .22rem rgba(167,119,50,.25); }
 .student-registration-page .form-privacy { color: #858477; font-size: .77rem; margin: 15px 0 0; }
@@ -1652,11 +1652,11 @@ a.social-empty-card:hover,
   position: relative;
   transition: border-color .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1);
 }
-.internship-card::before { background: linear-gradient(90deg, #087e83, #a5e5c7); content: ""; height: 4px; left: 24px; position: absolute; right: 24px; top: 0; transform: scaleX(.24); transform-origin: left; transition: transform .25s ease; }
+.internship-card::before { background: linear-gradient(90deg, #087e83, #a5e5c7); content: ""; height: 4px; left: 24px; position: absolute; right: 24px; top: 0; transform: scaleX(.24); transform-origin: left; transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
 .internship-card:hover { border-color: #b7d8cc; box-shadow: 0 23px 48px rgba(22,78,72,.14); transform: translateY(-2px); }
 .internship-card:hover::before { transform: scaleX(1); }
 .internship-card-top { align-items: center; display: flex; justify-content: space-between; margin-bottom: 23px; }
-.internship-icon { align-items: center; background: #e4f7f1; border: 1px solid #cfede2; border-radius: 13px; color: #087e83; display: inline-flex; font-size: 1.45rem; height: 52px; justify-content: center; transition: background .25s ease, color .25s ease, transform .25s ease; width: 52px; }
+.internship-icon { align-items: center; background: #e4f7f1; border: 1px solid #cfede2; border-radius: 13px; color: #087e83; display: inline-flex; font-size: 1.45rem; height: 52px; justify-content: center; transition: background .35s ease, color .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1); width: 52px; }
 .internship-card:hover .internship-icon { background: #087e83; color: white; transform: rotate(-4deg); }
 .internship-duration { background: #edf6f3; border: 1px solid #dcece6; border-radius: 20px; color: #45675e; font-size: .76rem; font-weight: 700; padding: 7px 11px; }
 .internship-duration i { color: #087e83; margin-right: 4px; }
@@ -1913,12 +1913,12 @@ main.page-contact {
   padding: 17px 20px;
   position: relative;
   text-align: left;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  transition: border-color .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1);
 }
 .registration-course-image,
 .registration-course-shade,
 .registration-course-placeholder { inset: 0; position: absolute; }
-.registration-course-image { height: 100%; object-fit: cover; transition: transform .35s ease; width: 100%; }
+.registration-course-image { height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.2, .8, .2, 1); width: 100%; }
 .registration-course-choice-java .registration-course-image { object-position: 69% center; }
 .registration-course-choice-python .registration-course-image { object-position: 70% center; }
 .registration-course-shade { background: linear-gradient(90deg, rgba(7, 18, 28, .96), rgba(7, 18, 28, .9) 58%, rgba(7, 18, 28, .62)); }
@@ -1996,7 +1996,7 @@ main.page-contact {
   position: absolute;
   right: 20px;
   top: 20px;
-  transition: background .2s ease, color .2s ease, transform .2s ease;
+  transition: background .35s ease, color .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1);
   width: 38px;
 }
 .registration-modal-close:hover { background: #e2ece6; color: #173b35; transform: rotate(90deg); }
@@ -2119,7 +2119,7 @@ main.page-contact {
 }
 .home-course-background,
 .home-course-shade { inset: 0; position: absolute; }
-.home-course-background { height: 100%; object-fit: cover; transition: transform .4s ease; width: 100%; }
+.home-course-background { height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .8, .2, 1); width: 100%; }
 .home-course-card-java .home-course-background { object-position: 69% center; }
 .home-course-card-python .home-course-background { object-position: 70% center; }
 .home-course-shade { background: linear-gradient(90deg, rgba(7,18,28,.94), rgba(7,18,28,.82) 58%, rgba(7,18,28,.52)); }
@@ -2212,7 +2212,7 @@ main.page-contact {
 }
 .program-card-background,
 .program-card-shade { inset: 0; position: absolute; }
-.program-card-background { height: 100%; left: auto; object-fit: contain; object-position: right center; opacity: .9; right: 0; transition: transform .4s ease; width: 66%; }
+.program-card-background { height: 100%; left: auto; object-fit: contain; object-position: right center; opacity: .9; right: 0; transition: transform .6s cubic-bezier(.2, .8, .2, 1); width: 66%; }
 .program-card-shade { background: linear-gradient(90deg, rgba(7,18,28,.98), rgba(7,18,28,.94) 43%, rgba(7,18,28,.34)); }
 .program-card-with-image:hover .program-card-background { transform: scale(1.035); }
 .program-card-with-image .program-card-main { color: #fff; padding: clamp(24px, 4vw, 40px); position: relative; z-index: 1; }
