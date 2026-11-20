@@ -21,7 +21,7 @@ Local runs default to debug mode and a development-only secret when no Render ho
 Build command:
 
 ```sh
-pip install -r requirements.txt && python mypro/manage.py collectstatic --noinput
+pip install -r requirements.txt && python mypro/manage.py collectstatic --noinput && python -c "from pathlib import Path; assert Path('mypro/staticfiles/staticfiles.json').is_file(), 'collectstatic manifest is missing'"
 ```
 
 Start command:
