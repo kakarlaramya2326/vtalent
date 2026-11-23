@@ -1,8 +1,2 @@
-__pycache__/
-*.py[cod]
-*.sqlite3
-.env
-.venv/
-venv/
-myvenv/
-staticfiles/
+.DS_Store
+Thumbs.db

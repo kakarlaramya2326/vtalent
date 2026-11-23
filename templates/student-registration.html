@@ -1,0 +1,528 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VTalent Institute training and career development in Hyderabad.">
+  <title>Student Registration | VTalent Institute</title>
+  <link rel="icon" type="image/png" href="/static/images/brand/vtalent-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/static/css/style.css?v=37" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="reading-progress" role="progressbar" aria-label="Page reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span class="reading-progress-bar"></span>
+  </div>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span><i class="bi bi-geo-alt"></i> Hyderabad, Telangana</span>
+      <div class="topbar-contact">
+        <a href="tel:+918977149444"><i class="bi bi-telephone"></i> +91 89771 49444</a>
+        <a href="mailto:hyd@vtalent.in"><i class="bi bi-envelope"></i> hyd@vtalent.in</a>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-xl navbar-light site-nav">
+    <div class="container">
+      <a class="navbar-brand brand" href="/templates/index.html" aria-label="VTalent Institute home">
+        <img class="brand-logo" src="/static/images/brand/vtalent-logo.png" alt="VTalent Institute">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavigation">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#about-institute">About Institute</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#ceo">About CEO</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/internships.html">Internships</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#placements">Placements</a></li>
+          <li class="nav-item"><a class="nav-link" href="/templates/index.html#contact">Contact</a></li>
+          <li class="nav-item ms-lg-3"><a class="btn btn-primary nav-cta" href="/templates/student-registration.html">Register Now <i class="bi bi-arrow-right"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-student_registration">
+    
+<div class="student-registration-page">
+  <div class="registration-modal-screen">
+    <div class="registration-modal-backdrop" aria-hidden="true">
+      <img src="/static/images/programs/RegisterPage.avif" alt="">
+    </div>
+    <section class="registration-modal" role="dialog" aria-modal="true" aria-labelledby="registration-modal-title" tabindex="-1">
+      <div class="registration-modal-showcase">
+        <div class="registration-showcase-heading">
+          <span class="registration-showcase-kicker"><i class="bi bi-stars" aria-hidden="true"></i> YOUR NEXT CHAPTER</span>
+          <h1>Build skills.<br><span>Build your future.</span></h1>
+          <p>Choose a six-month full-stack course or start with a focused 45-day internship.</p>
+        </div>
+        <div class="registration-course-set" data-program-type="coaching">
+          <div class="registration-course-choices" aria-label="Choose a six-month course">
+            <button class="registration-course-choice registration-course-choice-java" type="button" data-program-type="coaching" data-course-slug="java-full-stack" data-course-label="Java Full Stack" data-course-duration="6 months" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/java-training-institute.webp" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">6 months <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">FULL STACK DEVELOPMENT</span>
+              <span class="registration-course-name">Java Full Stack Development with AI Integration and AWS Cloud</span>
+              <span class="registration-course-description">Learn Java programming from fundamentals to advanced concepts, front-end development, database management, back-end application development using Spring Boot, REST APIs, AI integration, and AWS Cloud deployment. Build real-time projects and prepare for technical interviews with placement assistance.</span>
+            </button>
+            <button class="registration-course-choice registration-course-choice-python" type="button" data-program-type="coaching" data-course-slug="python-full-stack" data-course-label="Python Full Stack" data-course-duration="6 months" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/Neon Python Code Horizon.png" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">6 months <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">FULL STACK DEVELOPMENT</span>
+              <span class="registration-course-name">Python Full Stack Development with AI/ML and AWS</span>
+              <span class="registration-course-description">Learn Python programming, front-end development, databases, Django web development, REST APIs, AI/ML fundamentals, and AWS Cloud. Build real-time projects and prepare for technical interviews with placement assistance.</span>
+            </button>
+          </div>
+        </div>
+        <div class="registration-course-set" data-program-type="internship" hidden>
+          <div class="registration-course-choices registration-internship-choices" aria-label="Choose a 45-day internship">
+            
+            <button class="registration-course-choice registration-course-choice-internship registration-course-choice-python" type="button" data-program-type="internship" data-course-slug="python-internship-45-days" data-course-label="Python Internship" data-course-duration="45 days" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/Neon Python Code Horizon.png" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">45 days <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">Python Development Internship</span>
+              <span class="registration-course-description">Learn core Python subjects through guided coding practice and a hands-on project.</span>
+            </button>
+            
+            <button class="registration-course-choice registration-course-choice-internship registration-course-choice-java" type="button" data-program-type="internship" data-course-slug="java-internship-45-days" data-course-label="Java Internship" data-course-duration="45 days" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/java-training-institute.webp" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">45 days <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">Java Development Internship</span>
+              <span class="registration-course-description">Learn core Java subjects through guided coding practice and a hands-on project.</span>
+            </button>
+            
+            <button class="registration-course-choice registration-course-choice-internship" type="button" data-program-type="internship" data-course-slug="sql-internship-45-days" data-course-label="SQL Internship" data-course-duration="45 days" aria-pressed="false">
+              <span class="registration-course-placeholder"><i class="bi bi-database" aria-hidden="true"></i></span>
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">45 days <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">SQL Database Internship</span>
+              <span class="registration-course-description">Learn core relational database concepts and SQL through query practice and a guided project.</span>
+            </button>
+            
+            <button class="registration-course-choice registration-course-choice-internship" type="button" data-program-type="internship" data-course-slug="ai-ml-internship-45-days" data-course-label="AI/ML Internship" data-course-duration="45 days" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/ai_ml background.jpg" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">45 days <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">AI &amp; Machine Learning Internship</span>
+              <span class="registration-course-description">Explore AI and machine learning foundations with practical data exercises and a guided beginner project.</span>
+            </button>
+            
+            <button class="registration-course-choice registration-course-choice-internship" type="button" data-program-type="internship" data-course-slug="aws-internship-45-days" data-course-label="AWS Internship" data-course-duration="45 days" aria-pressed="false">
+              <img class="registration-course-image" src="/static/images/programs/aws background.jpg" alt="">
+              <span class="registration-course-shade"></span>
+              <span class="registration-course-badge">45 days <i class="bi bi-check-circle-fill" aria-hidden="true"></i></span>
+              <span class="registration-course-category">45-DAY INTERNSHIP</span>
+              <span class="registration-course-name">AWS Cloud Internship</span>
+              <span class="registration-course-description">Learn cloud computing and AWS foundations through guided labs and a simple deployment project.</span>
+            </button>
+            
+          </div>
+        </div>
+        <div class="registration-showcase-footer">
+          <span><i class="bi bi-kanban" aria-hidden="true"></i> Project-based learning</span>
+          <span><i class="bi bi-person-check" aria-hidden="true"></i> Career preparation</span>
+        </div>
+      </div>
+
+      <div class="registration-modal-form">
+        <a class="registration-modal-close" href="/templates/index.html" aria-label="Close registration and return home" title="Return home">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </a>
+        <div class="registration-form-heading">
+          <span class="registration-form-kicker">REGISTRATION <span> / YOUR DETAILS</span></span>
+          <h2 id="registration-modal-title">Let’s get to know you</h2>
+          <p>Pick your learning path and tell us how to reach you.</p>
+        </div>
+        <div class="registration-modal-progress" aria-hidden="true"><span></span></div>
+
+        <form method="post" action="/templates/student-registration.html" novalidate>
+          <input type="hidden" name="csrfmiddlewaretoken" value="ini7CznrZfQWtykq4GjUJ4J2jWvqE2Y7vJklFQvWMa36v054nzvF3ulgwBDPJvM8">
+          <input id="selected-course" type="hidden" name="course" value="">
+          <div class="registration-program-field">
+            <div class="registration-field-label">Choose your learning path</div>
+            <div class="program-type-options"><div id="id_program_type"><div>
+    <label for="id_program_type_0"><input type="radio" name="program_type" value="internship" required id="id_program_type_0">
+ 45-Day Internship</label>
+
+</div><div>
+    <label for="id_program_type_1"><input type="radio" name="program_type" value="coaching" required id="id_program_type_1">
+ 6-Month Coaching</label>
+
+</div>
+</div></div>
+            
+            <p class="registration-course-status" aria-live="polite">
+              Choose a course card or select a 45-day internship.
+            </p>
+          </div>
+
+          
+
+          <div class="registration-field">
+            <label class="form-label" for="id_student_name">Student Name</label>
+            <div class="field-with-icon"><i class="bi bi-person" aria-hidden="true"></i><input type="text" name="student_name" class="form-control" autocomplete="name" placeholder="Enter your full name" maxlength="100" required id="id_student_name"></div>
+            
+          </div>
+          <div class="registration-field">
+            <label class="form-label" for="id_college_name">College Name</label>
+            <div class="field-with-icon"><i class="bi bi-mortarboard" aria-hidden="true"></i><input type="text" name="college_name" class="form-control" autocomplete="organization" placeholder="Enter your college name" maxlength="150" required id="id_college_name"></div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-7 registration-field">
+              <label class="form-label" for="id_mobile_number">Mobile Number</label>
+              <div class="field-with-icon"><i class="bi bi-phone" aria-hidden="true"></i><input type="tel" name="mobile_number" class="form-control" inputmode="numeric" autocomplete="tel-national" pattern="[0-9]{10}" placeholder="10-digit mobile number" maxlength="10" minlength="10" required id="id_mobile_number"></div>
+              
+            </div>
+            <div class="col-md-5 registration-field">
+              <label class="form-label" for="id_passed_out_year">Passed Out Year</label>
+              <div class="field-with-icon"><i class="bi bi-calendar3" aria-hidden="true"></i><input type="number" name="passed_out_year" class="form-control" min="1950" placeholder="e.g. 2026" required id="id_passed_out_year"></div>
+              
+            </div>
+          </div>
+          
+          <button class="btn btn-primary w-100 form-submit" type="submit"><span class="registration-submit-label">Continue to WhatsApp</span><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+          <p class="form-privacy"><i class="bi bi-shield-check" aria-hidden="true"></i> Your details are only used to prepare your program enquiry.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand brand-light" href="/templates/index.html#home" aria-label="VTalent Institute home">
+          
+
+            <img src="/static/images/brand/vtalent-logo.png" alt="VTalent Logo">
+        </a>
+        <p>Training and career development to help learners build skills for their next opportunity.</p>
+      </div>
+      <div class="footer-links">
+        <h2>Explore</h2>
+        <a href="/templates/index.html#about-institute">About the institute</a>
+        <a href="/templates/index.html#ceo">About the CEO</a>
+        <a href="/templates/index.html#courses">Courses</a>
+        <a href="/templates/internships.html">Internships</a>
+        <a href="/templates/index.html#placements">Placements</a>
+        <a href="/templates/index.html#contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h2>Get in touch</h2>
+        <a href="tel:+918977149444"><i class="bi bi-telephone me-2"></i>+91 89771 49444</a>
+        <a href="mailto:hyd@vtalent.in"><i class="bi bi-envelope me-2"></i>hyd@vtalent.in</a>
+        <span><i class="bi bi-geo-alt me-2"></i>Hyderabad, Telangana</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">© VTalent Institute. All rights reserved.</div>
+    </div>
+  </footer>
+  <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden>
+    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+  </button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+(() => {
+  const progress = document.querySelector(".reading-progress");
+  const progressBar = document.querySelector(".reading-progress-bar");
+  const backToTop = document.querySelector(".back-to-top");
+  const navigation = document.querySelector("#mainNavigation");
+
+  if (!progress || !progressBar || !backToTop) {
+    return;
+  }
+
+  let updatePending = false;
+
+  const updateScrollControls = () => {
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTop = Math.max(
+      window.scrollY || document.documentElement.scrollTop,
+      0,
+    );
+    const percentage =
+      scrollableHeight > 0
+        ? Math.min((scrollTop / scrollableHeight) * 100, 100)
+        : 0;
+
+    progressBar.style.transform = `scaleX(${percentage / 100})`;
+    progress.setAttribute("aria-valuenow", String(Math.round(percentage)));
+    backToTop.hidden = scrollTop < 400;
+    updatePending = false;
+  };
+
+  const requestScrollUpdate = () => {
+    if (!updatePending) {
+      updatePending = true;
+      window.requestAnimationFrame(updateScrollControls);
+    }
+  };
+
+  window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+  window.addEventListener("resize", requestScrollUpdate);
+  backToTop.addEventListener("click", () => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  });
+
+  navigation?.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      if (
+        navigation.classList.contains("show") &&
+        window.bootstrap?.Collapse
+      ) {
+        window.bootstrap.Collapse.getOrCreateInstance(navigation).hide();
+      }
+    });
+  });
+
+  updateScrollControls();
+})();
+
+(() => {
+  const dialog = document.querySelector(".registration-modal");
+  const form = document.querySelector(".registration-modal form");
+  const closeLink = dialog?.querySelector(".registration-modal-close");
+  if (!dialog || !form || !closeLink) {
+    return;
+  }
+
+  dialog.focus({ preventScroll: true });
+
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      window.location.assign(closeLink.href);
+      return;
+    }
+
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusableElements = dialog.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"])',
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (
+      event.shiftKey &&
+      (document.activeElement === dialog ||
+        document.activeElement === firstElement)
+    ) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  });
+
+  const courseInput = form.querySelector("#selected-course");
+  const courseButtons = Array.from(
+    document.querySelectorAll(".registration-course-choice"),
+  );
+  const courseGroups = Array.from(
+    document.querySelectorAll(".registration-course-set"),
+  );
+  const courseStatus = form.querySelector(".registration-course-status");
+  const submitLabel = form.querySelector(".registration-submit-label");
+  const programInputs = Array.from(
+    form.querySelectorAll('input[name="program_type"]'),
+  );
+
+  const getProgramType = () => {
+    const selectedProgram = programInputs.find((input) => input.checked);
+    return selectedProgram ? selectedProgram.value : "coaching";
+  };
+
+  const updateCourseGroups = () => {
+    const activeProgramType = getProgramType();
+    courseGroups.forEach((group) => {
+      group.hidden = group.dataset.programType !== activeProgramType;
+    });
+  };
+
+  const updateSubmitLabel = () => {
+    submitLabel.textContent = "Continue to WhatsApp";
+  };
+
+  const selectCourse = (slug) => {
+    courseInput.value = slug;
+    const selectedCourse = courseButtons.find(
+      (button) => button.dataset.courseSlug === slug,
+    );
+
+    courseButtons.forEach((button) => {
+      const isSelected = button.dataset.courseSlug === slug;
+      button.classList.toggle("is-selected", isSelected);
+      button.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    if (selectedCourse) {
+      const programLabel =
+        selectedCourse.dataset.programType === "internship"
+          ? "internship"
+          : "course";
+      courseStatus.textContent = `Selected: ${selectedCourse.dataset.courseLabel} · ${selectedCourse.dataset.courseDuration} ${programLabel}`;
+    } else {
+      courseStatus.textContent =
+        getProgramType() === "internship"
+          ? "Choose a 45-day internship card above."
+          : "Choose a course card or select a 45-day internship.";
+    }
+
+    updateCourseGroups();
+    updateSubmitLabel();
+  };
+
+  courseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const programOption = programInputs.find(
+        (input) => input.value === button.dataset.programType,
+      );
+      if (programOption && !programOption.checked) {
+        programOption.checked = true;
+        programOption.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      selectCourse(button.dataset.courseSlug);
+    });
+  });
+
+  programInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+      if (input.checked) {
+        selectCourse("");
+      }
+    });
+  });
+
+  updateCourseGroups();
+  updateSubmitLabel();
+})();
+
+
+(() => {
+  const form = document.querySelector(".registration-modal-form form");
+  if (!form) return;
+
+  const nameInput = form.querySelector('[name="student_name"]');
+  const collegeInput = form.querySelector('[name="college_name"]');
+  const mobileInput = form.querySelector('[name="mobile_number"]');
+  const yearInput = form.querySelector('[name="passed_out_year"]');
+  const courseInput = form.querySelector("#selected-course");
+  const namePattern = /^[\p{L}]+(?:[ .'-][\p{L}]+)*\.?$/u;
+
+  form.removeAttribute("novalidate");
+  nameInput.required = true;
+  nameInput.maxLength = 100;
+  collegeInput.required = true;
+  collegeInput.maxLength = 150;
+  mobileInput.required = true;
+  mobileInput.minLength = 10;
+  mobileInput.maxLength = 10;
+  mobileInput.pattern = "[0-9]{10}";
+  yearInput.required = true;
+  yearInput.min = "1950";
+
+  const parameters = new URLSearchParams(window.location.search);
+  const requestedProgram = parameters.get("program_type");
+  if (requestedProgram === "internship" || requestedProgram === "coaching") {
+    const programOption = form.querySelector(
+      `[name="program_type"][value="${requestedProgram}"]`
+    );
+    programOption.checked = true;
+    programOption.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+  const requestedCourse = parameters.get("course");
+  const requestedCard = Array.from(
+    document.querySelectorAll(".registration-course-choice")
+  ).find((card) => card.dataset.courseSlug === requestedCourse);
+  if (requestedCard) requestedCard.click();
+
+  nameInput.addEventListener("input", () => {
+    const name = nameInput.value.trim();
+    nameInput.setCustomValidity(name && !namePattern.test(name)
+      ? "Enter a valid name using letters, spaces, apostrophes, or hyphens."
+      : "");
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = nameInput.value.trim();
+    nameInput.value = name;
+    nameInput.setCustomValidity(namePattern.test(name)
+      ? ""
+      : "Enter a valid name using letters, spaces, apostrophes, or hyphens.");
+    if (!form.reportValidity()) return;
+
+    const selectedProgram = form.querySelector('[name="program_type"]:checked');
+    const programType = selectedProgram ? selectedProgram.value : "coaching";
+    const selectedCard = Array.from(
+      document.querySelectorAll(".registration-course-choice")
+    ).find((card) => card.dataset.courseSlug === courseInput.value);
+    const programName = selectedCard
+      ? selectedCard.dataset.courseLabel
+      : programType === "internship"
+        ? "45-day internship programs"
+        : "Six-month coaching courses";
+    const programLabel = programType === "internship"
+      ? "Internship"
+      : "Six-month coaching course";
+    const duration = selectedCard
+      ? selectedCard.dataset.courseDuration
+      : programType === "internship" ? "45 days" : "6 months";
+    const message = [
+      "Hello VTalent Institute,",
+      "",
+      "I am interested in joining your institute.",
+      "",
+      "Student Details:",
+      `Name: ${name}`,
+      `College Name: ${collegeInput.value.trim()}`,
+      `Mobile Number: ${mobileInput.value.trim()}`,
+      `Passed Out Year: ${yearInput.value}`,
+      "",
+      `Interested Program: ${programName}`,
+      `Program Type: ${programLabel}`,
+      `Duration: ${duration}`,
+      "",
+      "Please share the program details, fees, batch timings and admission information.",
+      "",
+      "Thank you."
+    ].join("\n");
+    window.location.assign(`https://wa.me/918977149444?text=${encodeURIComponent(message)}`);
+  });
+})();
+
+</script>
+  
+</body>
+</html>
